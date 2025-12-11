@@ -6,5 +6,8 @@ namespace ClinicaSR.DL.DALC
 {
     public class ComprobantePagoDALC
     {
+
+
+
     }
 }
