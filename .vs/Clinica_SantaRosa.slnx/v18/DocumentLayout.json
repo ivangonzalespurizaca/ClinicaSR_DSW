@@ -3,32 +3,56 @@
   "WorkspaceRootPath": "E:\\Clinica_SantaRosa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\citabe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\citabe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\comprobantepagobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\comprobantepagobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\especialidadbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\especialidadbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\horarioatencionbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\horarioatencionbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|e:\\clinica_santarosa\\clinicasr.dl.dalc\\comprobantepagodalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\comprobantepagodalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\medicobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\medicobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\pacientebe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\pacientebe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\usuariobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\usuariobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\horarioatencionbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\horarioatencionbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\especialidadbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\especialidadbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\comprobantepagobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\comprobantepagobe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\citabe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\citabe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|e:\\clinica_santarosa\\clinicasr.dl.dalc\\citadalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\citadalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\clinicasr.bl.be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\clinicasr.bl.be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|e:\\clinica_santarosa\\clinica_santarosa.webapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|solutionrelative:clinica_santarosa.webapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|e:\\clinica_santarosa\\clinica_santarosa.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|solutionrelative:clinica_santarosa.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|e:\\clinica_santarosa\\clinica_santarosa.webapi\\clinica_santarosa.webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{DDCEEB21-073C-4C02-95FC-1B694FF09E2F}|Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.csproj|solutionrelative:clinica_santarosa.webapi\\clinica_santarosa.webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\pacientebe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\pacientebe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5835E4A-F213-520F-F9E9-B27BD3547A5E}|Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj|e:\\clinica_santarosa\\clinica_santarosa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A5835E4A-F213-520F-F9E9-B27BD3547A5E}|Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj|e:\\clinica_santarosa\\clinica_santarosa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A5835E4A-F213-520F-F9E9-B27BD3547A5E}|Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj|solutionrelative:clinica_santarosa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|e:\\clinica_santarosa\\clinicasr.bl.be\\clinicasr.bl.be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{27D1DD1C-FD52-19DC-5528-36B4D390F766}|ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj|solutionrelative:clinicasr.bl.be\\clinicasr.bl.be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5835E4A-F213-520F-F9E9-B27BD3547A5E}|Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj|e:\\clinica_santarosa\\clinica_santarosa\\controllers\\seguridadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -87,14 +107,6 @@
       "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\horarioatenciondalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|e:\\clinica_santarosa\\clinicasr.dl.dalc\\comprobantepagodalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\comprobantepagodalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|e:\\clinica_santarosa\\clinicasr.dl.dalc\\citadalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\citadalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|e:\\clinica_santarosa\\clinicasr.dl.dalc\\especialidaddalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1B06F7F4-41A3-6BED-57A0-2A496AC8C3F7}|ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj|solutionrelative:clinicasr.dl.dalc\\especialidaddalc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -138,7 +150,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -146,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "CitaBE.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\CitaBE.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\CitaBE.cs",
@@ -159,7 +171,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
+              "Title": "ClinicaSR.BL.BE.csproj",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+              "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+              "RelativeToolTip": "ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T20:37:38.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CitaDALC.cs",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\CitaDALC.cs",
+              "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\CitaDALC.cs",
+              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\CitaDALC.cs",
+              "RelativeToolTip": "ClinicaSR.DL.DALC\\CitaDALC.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T21:29:38.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "ComprobantePagoBE.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\ComprobantePagoBE.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\ComprobantePagoBE.cs",
@@ -167,11 +205,12 @@
               "RelativeToolTip": "ClinicaSR.BL.BE\\ComprobantePagoBE.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T20:41:15.847Z"
+              "WhenOpened": "2025-12-10T20:41:15.847Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "EspecialidadBE.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\EspecialidadBE.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\EspecialidadBE.cs",
@@ -179,7 +218,8 @@
               "RelativeToolTip": "ClinicaSR.BL.BE\\EspecialidadBE.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T20:38:35.57Z"
+              "WhenOpened": "2025-12-10T20:38:35.57Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -191,11 +231,12 @@
               "RelativeToolTip": "ClinicaSR.BL.BE\\HorarioAtencionBE.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T20:40:30.037Z"
+              "WhenOpened": "2025-12-10T20:40:30.037Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MedicoBE.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\MedicoBE.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\MedicoBE.cs",
@@ -203,11 +244,77 @@
               "RelativeToolTip": "ClinicaSR.BL.BE\\MedicoBE.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T20:39:04.581Z"
+              "WhenOpened": "2025-12-10T20:39:04.581Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
+              "Title": "UsuarioBE.cs",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\UsuarioBE.cs",
+              "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\UsuarioBE.cs",
+              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\UsuarioBE.cs",
+              "RelativeToolTip": "ClinicaSR.BL.BE\\UsuarioBE.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T20:40:01.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ComprobantePagoDALC.cs",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
+              "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
+              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
+              "RelativeToolTip": "ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T21:29:24.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Clinica_SantaRosa.WebAPI\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Clinica_SantaRosa.WebAPI\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T23:49:08.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "Clinica_SantaRosa.WebAPI\\appsettings.json",
+              "ToolTip": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\appsettings.json",
+              "RelativeToolTip": "Clinica_SantaRosa.WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-10T23:49:06.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Clinica_SantaRosa.WebAPI.http",
+              "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.http",
+              "RelativeDocumentMoniker": "Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.http",
+              "ToolTip": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.http",
+              "RelativeToolTip": "Clinica_SantaRosa.WebAPI\\Clinica_SantaRosa.WebAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-12-10T23:49:01.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "PacienteBE.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\PacienteBE.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\PacienteBE.cs",
@@ -219,19 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UsuarioBE.cs",
-              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\UsuarioBE.cs",
-              "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\UsuarioBE.cs",
-              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\UsuarioBE.cs",
-              "RelativeToolTip": "ClinicaSR.BL.BE\\UsuarioBE.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA4wAwAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T20:40:01.248Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Program.cs",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Program.cs",
@@ -243,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\appsettings.json",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\appsettings.json",
@@ -255,19 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ClinicaSR.BL.BE.csproj",
-              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
-              "RelativeDocumentMoniker": "ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
-              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
-              "RelativeToolTip": "ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-10T20:37:38.279Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "SeguridadController.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Controllers\\SeguridadController.cs",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Controllers\\SeguridadController.cs",
@@ -279,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "ListaUsuarios.cshtml",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Views\\Seguridad\\ListaUsuarios.cshtml",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Views\\Seguridad\\ListaUsuarios.cshtml",
@@ -291,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "ClinicaSR.DL.DALC.csproj",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
@@ -303,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "ConexionDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ConexionDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\ConexionDALC.cs",
@@ -315,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "Clinica_SantaRosa.PL.WebApp.csproj",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Clinica_SantaRosa.PL.WebApp.csproj",
@@ -327,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "Home.cshtml",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Views\\Seguridad\\Home.cshtml",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Views\\Seguridad\\Home.cshtml",
@@ -339,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "UsuarioModel.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\Clinica_SantaRosa\\Models\\UsuarioModel.cs",
               "RelativeDocumentMoniker": "Clinica_SantaRosa\\Models\\UsuarioModel.cs",
@@ -351,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "ClinicaSR.BL.BC.csproj",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
@@ -363,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "UsuarioDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\UsuarioDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\UsuarioDALC.cs",
@@ -375,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "UsuarioBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\UsuarioBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\UsuarioBC.cs",
@@ -387,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "HorarioAtencionDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\HorarioAtencionDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\HorarioAtencionDALC.cs",
@@ -399,31 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ComprobantePagoDALC.cs",
-              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
-              "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
-              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
-              "RelativeToolTip": "ClinicaSR.DL.DALC\\ComprobantePagoDALC.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T21:29:24.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "CitaDALC.cs",
-              "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\CitaDALC.cs",
-              "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\CitaDALC.cs",
-              "ToolTip": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\CitaDALC.cs",
-              "RelativeToolTip": "ClinicaSR.DL.DALC\\CitaDALC.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T21:29:38.513Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "EspecialidadDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\EspecialidadDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\EspecialidadDALC.cs",
@@ -435,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "PacienteDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\PacienteDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\PacienteDALC.cs",
@@ -447,7 +506,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "MedicoDALC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.DL.DALC\\MedicoDALC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.DL.DALC\\MedicoDALC.cs",
@@ -459,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "MedicoBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\MedicoBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\MedicoBC.cs",
@@ -471,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "HorarioAtencionBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\HorarioAtencionBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\HorarioAtencionBC.cs",
@@ -483,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "PacienteBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\PacienteBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\PacienteBC.cs",
@@ -495,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "EspecialidadBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\EspecialidadBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\EspecialidadBC.cs",
@@ -507,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "ComprobantePagoBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\ComprobantePagoBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\ComprobantePagoBC.cs",
@@ -519,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "CitaBC.cs",
               "DocumentMoniker": "E:\\Clinica_SantaRosa\\ClinicaSR.BL.BC\\CitaBC.cs",
               "RelativeDocumentMoniker": "ClinicaSR.BL.BC\\CitaBC.cs",

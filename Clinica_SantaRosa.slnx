@@ -2,5 +2,6 @@
   <Project Path="ClinicaSR.BL.BC/ClinicaSR.BL.BC.csproj" />
   <Project Path="ClinicaSR.BL.BE/ClinicaSR.BL.BE.csproj" />
   <Project Path="ClinicaSR.DL.DALC/ClinicaSR.DL.DALC.csproj" />
+  <Project Path="Clinica_SantaRosa.WebAPI/Clinica_SantaRosa.WebAPI.csproj" Id="ddceeb21-073c-4c02-95fc-1b694ff09e2f" />
   <Project Path="Clinica_SantaRosa/Clinica_SantaRosa.PL.WebApp.csproj" />
 </Solution>
