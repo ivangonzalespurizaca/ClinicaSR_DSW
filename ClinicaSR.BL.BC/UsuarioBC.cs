@@ -12,9 +12,12 @@ namespace ClinicaSR.BL.BC
 
         public List<UsuarioBE> ListarUsuarios()
         {
-            return usuarioDALC.listaUsuarios();
+            return usuarioDALC.ListarUsuarios();
         }
 
-
+        public UsuarioBE Login(string username, string password)
+        {
+            return usuarioDALC.Login(username, password);
+        }
     }
 }

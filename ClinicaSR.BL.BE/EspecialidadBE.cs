@@ -7,8 +7,8 @@ namespace ClinicaSR.BL.BE
 {
     public class EspecialidadBE
     {
-        public int Id { get; set; }
-        public string? Nombre { get; set; } 
+        public int ID { get; set; }
+        public string Nombre { get; set; }
 
 
     }

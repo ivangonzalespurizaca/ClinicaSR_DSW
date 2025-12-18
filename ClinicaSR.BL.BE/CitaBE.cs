@@ -15,7 +15,7 @@ namespace ClinicaSR.BL.BE
         public MedicoBE MedicoBE { get; set; }  
         public PacienteBE PacienteBE { get; set; }
 
-	    //public UsuarioBE UsuarioBE { get; set; }
+	    public UsuarioBE UsuarioBE { get; set; }
 
     }
 

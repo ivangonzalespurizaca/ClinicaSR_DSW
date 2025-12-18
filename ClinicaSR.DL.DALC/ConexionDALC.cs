@@ -13,27 +13,23 @@ namespace ClinicaSR.DL.DALC
 
         static ConexionDALC()
         {
-
-            var builder = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).
-                AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             IConfiguration config = builder.Build();
-            cadenaBDSeg = config.GetConnectionString("BDSeguridad");
-            cadenaBDHospital = config.GetConnectionString("BDTiendaCarro");
+            cadenaBDSeg = config.GetConnectionString("BDSeguridad");   // Usuarios
+            cadenaBDHospital = config.GetConnectionString("BDHospital"); // Hospital: citas, médicos, pacientes...
         }
-
-
-
 
         public static SqlConnection GetConnectionBDSeg()
         {
             return new SqlConnection(cadenaBDSeg);
         }
 
-        public static SqlConnection GetConnectionBDTiendaCarros()
+        public static SqlConnection GetConnectionBDHospital()
         {
             return new SqlConnection(cadenaBDHospital);
         }
-
     }
 }
