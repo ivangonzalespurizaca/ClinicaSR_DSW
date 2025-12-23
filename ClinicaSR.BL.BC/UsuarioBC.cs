@@ -9,10 +9,9 @@ namespace ClinicaSR.BL.BC
     public class UsuarioBC
     {
         private UsuarioDALC usuarioDALC = new UsuarioDALC();
-
         public List<UsuarioBE> ListarUsuarios()
         {
-            return usuarioDALC.ListarUsuarios();
+            return usuarioDALC.listarUsuarios();
         }
 
         public UsuarioBE Login(string username, string password)

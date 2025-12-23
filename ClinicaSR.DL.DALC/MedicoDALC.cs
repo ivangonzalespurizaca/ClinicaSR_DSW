@@ -35,7 +35,7 @@ namespace ClinicaSR.DL.DALC
                             Telefono = dr.IsDBNull(5) ? null : dr.GetString(5),
                             EspecialidadBE = new EspecialidadBE
                             {
-                                ID = dr.GetInt32(6),
+                                ID_Especialidad = dr.GetInt32(6),
                                 Nombre = dr.GetString(7)
                             }
                         };
@@ -70,7 +70,7 @@ namespace ClinicaSR.DL.DALC
                 cmd.Parameters.AddWithValue("@DNI", medicoBE.DNI);
                 cmd.Parameters.AddWithValue("@Nro_Colegiatura", medicoBE.Nro_Colegiatura);
                 cmd.Parameters.AddWithValue("@Telefono", (object)medicoBE.Telefono ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@EspecialidadID", medicoBE.EspecialidadBE.ID);
+                cmd.Parameters.AddWithValue("@EspecialidadID", medicoBE.EspecialidadBE.ID_Especialidad);
 
                 SqlParameter idSalida = new SqlParameter("@ID_Medico", SqlDbType.Int)
                 {
@@ -109,7 +109,7 @@ namespace ClinicaSR.DL.DALC
                 cmd.Parameters.AddWithValue("@DNI", medicoBE.DNI);
                 cmd.Parameters.AddWithValue("@Nro_Colegiatura", medicoBE.Nro_Colegiatura);
                 cmd.Parameters.AddWithValue("@Telefono", (object)medicoBE.Telefono ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@EspecialidadID", medicoBE.EspecialidadBE.ID);
+                cmd.Parameters.AddWithValue("@EspecialidadID", medicoBE.EspecialidadBE.ID_Especialidad);
 
                 SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
                 {

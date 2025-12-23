@@ -13,9 +13,9 @@ namespace ClinicaSR.BL.BE
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string DNI { get; set; }
-        public string Telefono { get; set; }
-        public string Img_Perfil { get; set; }
-        public string Correo { get; set; }
+        public string? Telefono { get; set; }
+        public string? Img_Perfil { get; set; }
+        public string? Correo { get; set; }
         public Rol Rol { get; set; }
         public EstadoUsuario Estado { get; set; }
     }

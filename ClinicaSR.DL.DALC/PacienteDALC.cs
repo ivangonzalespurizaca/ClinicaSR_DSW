@@ -20,7 +20,7 @@ namespace ClinicaSR.DL.DALC
                 cmd.Parameters.AddWithValue("@Nombres", pacienteBE.Nombres);
                 cmd.Parameters.AddWithValue("@Apellidos", pacienteBE.Apellidos);
                 cmd.Parameters.AddWithValue("@DNI", pacienteBE.DNI);
-                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_Nacimiento);
                 cmd.Parameters.AddWithValue("@Telefono", (object)pacienteBE.Telefono ?? DBNull.Value);
 
                 // Parámetro de salida
@@ -68,7 +68,7 @@ namespace ClinicaSR.DL.DALC
                             Nombres = dr.GetString(1),
                             Apellidos = dr.GetString(2),
                             DNI = dr.GetString(3),
-                            Fecha_nacimiento = dr.GetDateTime(4),
+                            Fecha_Nacimiento = dr.GetDateTime(4),
                             Telefono = dr.IsDBNull(5) ? null : dr.GetString(5)
                         };
                         lista.Add(paciente);
@@ -101,7 +101,7 @@ namespace ClinicaSR.DL.DALC
                 cmd.Parameters.AddWithValue("@Nombres", pacienteBE.Nombres);
                 cmd.Parameters.AddWithValue("@Apellidos", pacienteBE.Apellidos);
                 cmd.Parameters.AddWithValue("@DNI", pacienteBE.DNI);
-                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_Nacimiento);
                 cmd.Parameters.AddWithValue("@Telefono", (object)pacienteBE.Telefono ?? DBNull.Value);
 
                 SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
@@ -182,7 +182,7 @@ namespace ClinicaSR.DL.DALC
                             Nombres = dr.GetString(1),
                             Apellidos = dr.GetString(2),
                             DNI = dr.GetString(3),
-                            Fecha_nacimiento = dr.GetDateTime(4),
+                            Fecha_Nacimiento = dr.GetDateTime(4),
                             Telefono = dr.IsDBNull(5) ? null : dr.GetString(5)
                         };
                     }

@@ -27,7 +27,7 @@ namespace ClinicaSR.DL.DALC
                     {
                         EspecialidadBE esp = new EspecialidadBE
                         {
-                            ID = dr.GetInt32(0),
+                            ID_Especialidad = dr.GetInt32(0),
                             Nombre = dr.GetString(1)
                         };
                         lista.Add(esp);
@@ -122,7 +122,7 @@ namespace ClinicaSR.DL.DALC
                 SqlCommand cmd = new SqlCommand("USP_Actualizar_Especialidad", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@ID", especialidadBE.ID);
+                cmd.Parameters.AddWithValue("@ID", especialidadBE.ID_Especialidad);
                 cmd.Parameters.AddWithValue("@Nombre", especialidadBE.Nombre);
 
                 SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)

@@ -32,7 +32,7 @@ namespace ClinicaSR.DL.DALC
                                 ID_Cita = dr.GetInt32(0),
                                 Fecha_Cita = dr.GetDateTime(1),
                                 Motivo = dr.GetString(2),
-                                estado = (Estado)Enum.Parse(typeof(Estado), dr.GetString(3)),
+                                Estado = (EstadoCita)Enum.Parse(typeof(EstadoCita), dr.GetString(3)),
                                 MedicoBE = new MedicoBE
                                 {
                                     ID_Medico = dr.GetInt32(4),
@@ -44,11 +44,6 @@ namespace ClinicaSR.DL.DALC
                                     ID_Paciente = dr.GetInt32(7),
                                     Nombres = dr.GetString(8),
                                     Apellidos = dr.GetString(9)
-                                },
-                                UsuarioBE = new UsuarioBE
-                                {
-                                    Id_Usuario = dr.GetInt32(10),
-                                    Username = dr.GetString(11)
                                 }
                             };
                             lista.Add(cita);

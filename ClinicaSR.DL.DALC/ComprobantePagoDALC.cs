@@ -34,8 +34,8 @@ namespace ClinicaSR.DL.DALC
                             Contacto_Pagador = dr.GetString(4),
                             Fecha_Emision = dr.GetDateTime(5),
                             Monto = dr.GetDecimal(6),
-                            Metodo_Pago = (Metodos)Enum.Parse(typeof(Metodos), dr.GetString(7)),
-                            Estado_Pago = (Estados)Enum.Parse(typeof(Estados), dr.GetString(8))
+                            Metodo_Pago = (MetodoPago)Enum.Parse(typeof(MetodoPago), dr.GetString(7)),
+                            Estado_Pago = (EstadoComprobante)Enum.Parse(typeof(EstadoComprobante), dr.GetString(8))
                         };
                         lista.Add(comp);
                     }

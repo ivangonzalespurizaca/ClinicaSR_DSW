@@ -36,9 +36,9 @@ namespace ClinicaSR.DL.DALC
                                     Nombres = dr.GetString(2),
                                     Apellidos = dr.GetString(3)
                                 },
-                                Dia_Semana = (Dias)Enum.Parse(typeof(Dias), dr.GetString(4)),
-                                Horario_Entrada = dr.GetDateTime(5),
-                                Horario_Salida = dr.GetDateTime(6)
+                                Dia_Semana = (DiaSemana)Enum.Parse(typeof(DiaSemana), dr.GetString(4)),
+                                Horario_Entrada = dr.GetTimeSpan(5),
+                                Horario_Salida = dr.GetTimeSpan(6)
                             };
                             lista.Add(horario);
                         }

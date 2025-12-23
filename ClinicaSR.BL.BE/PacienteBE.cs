@@ -11,7 +11,7 @@ namespace ClinicaSR.BL.BE
         public string Apellidos { get; set; }
         public string DNI { get; set; }
         public DateTime? Fecha_Nacimiento { get; set; }
-        public string Telefono { get; set; }
+        public string? Telefono { get; set; }
 
     }
 }

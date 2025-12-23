@@ -6,25 +6,21 @@ namespace ClinicaSR.BL.BE
 {
     public class CitaBE
     {
-        public int ID_Cita { get; set; }
-
-        public DateTime Fecha_Cita { get; set; }
-        public string Motivo { get; set; }
-        public Estado estado { get; set; }
-
-        public MedicoBE MedicoBE { get; set; }  
+        public long ID_Cita { get; set; }
+        public MedicoBE MedicoBE { get; set; }
         public PacienteBE PacienteBE { get; set; }
-
-	    public UsuarioBE UsuarioBE { get; set; }
-
+        public long ID_Usuario { get; set; }
+        public DateTime Fecha_Cita { get; set; }
+        public TimeSpan Hora_Cita { get; set; }
+        public string Motivo { get; set; }
+        public EstadoCita Estado { get; set; }
     }
 
-
-    public enum Estado
+    public enum EstadoCita
     {
-        Pendiente,
-        Pagado
+        PENDIENTE,
+        CONFIRMADO,
+        CANCELADO,
+        VENCIDO
     }
-
-        
 }

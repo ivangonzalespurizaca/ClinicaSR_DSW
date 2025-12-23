@@ -5,11 +5,15 @@ namespace Clinica_SantaRosa.PL.WebApp.Models
 {
     public class UsuarioModel
     {
-        private UsuarioBC usu = new UsuarioBC();
+        private UsuarioBC usuarioBC = new UsuarioBC();
 
         public List<UsuarioBE> listaUsuarios()
         {
-            return usu.ListarUsuarios();
+            return usuarioBC.ListarUsuarios();
+        }
+        public UsuarioBE Login(string username, string password)
+        {
+            return usuarioBC.Login(username, password);
         }
 
     }
