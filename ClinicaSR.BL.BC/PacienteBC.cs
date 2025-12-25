@@ -15,24 +15,9 @@ namespace ClinicaSR.BL.BC
             return pacienteDALC.ListarPacientes();
         }
 
-        public PacienteBE RegistrarPaciente(PacienteBE pacienteBE)
+        public List<PacienteBE>  buscarPacientePorFiltro(string filtro)
         {
-            return pacienteDALC.RegistrarPaciente(pacienteBE);
-        }
-
-        public bool ActualizarPaciente(PacienteBE pacienteBE)
-        {
-            return pacienteDALC.ActualizarPaciente(pacienteBE);
-        }
-
-        public bool EliminarPaciente(int idPaciente)
-        {
-            return pacienteDALC.EliminarPaciente(idPaciente);
-        }
-
-        public PacienteBE BuscarPacientePorId(int idPaciente)
-        {
-            return pacienteDALC.BuscarPacientePorId(idPaciente);
+            return pacienteDALC.BuscarPorCriterio(filtro);
         }
     }
 }

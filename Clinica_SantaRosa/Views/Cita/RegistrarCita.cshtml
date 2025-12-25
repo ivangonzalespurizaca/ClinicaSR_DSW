@@ -1,0 +1,108 @@
+﻿@model ClinicaSR.BL.BE.CitaBE
+@{
+    Layout = "_LayoutRecepcionista";
+}
+
+<div class="container mt-4">
+    <div class="header-bar mb-4">
+        <h2><i class="bi bi-calendar-plus me-2"></i>Registrar Nueva Cita</h2>
+    </div>
+
+    <div class="card-form shadow-sm p-4 bg-white rounded-3">
+        <form id="formCita">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-person me-1"></i>Paciente</label>
+                    <div class="input-group">
+                        <input type="text" id="pacienteNombre" class="form-control" readonly placeholder="Seleccione un paciente" />
+                        <input type="hidden" id="pacienteId" asp-for="PacienteBE.ID_Paciente" />
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPacientes">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-person-badge me-1"></i>Médico</label>
+                    <div class="input-group">
+                        <input type="text" id="medicoNombre" class="form-control" readonly placeholder="Seleccione un médico" />
+                        <input type="hidden" id="medicoId" asp-for="MedicoBE.ID_Medico" />
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMedicos">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    <div id="contenedorHorariosRegulares" class="mt-2" style="display:none;">
+                        <small class="text-muted fw-bold">Horarios de atención:</small>
+                        <div id="listaHorariosRegulares" class="border rounded p-2 bg-light" style="font-size: 0.85rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-calendar-event me-1"></i>Fecha</label>
+                    <input type="date" asp-for="Fecha_Cita" class="form-control" id="fechaCita" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-clock me-1"></i>Hora</label>
+                    <select id="horaCita" asp-for="Hora_Cita" class="form-select" required disabled>
+                        <option value="">Seleccione primero médico y fecha</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label font-weight-bold"><i class="bi bi-pencil-square me-1"></i>Motivo</label>
+                <textarea asp-for="Motivo" id="motivo" class="form-control" rows="3" placeholder="Escriba el motivo de la cita..."></textarea>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-action="Listar" class="btn btn-secondary px-5">Cancelar</a>
+                <button type="button" onclick="confirmarRegistro()" class="btn btn-success px-5">Registrar Cita</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modalPacientes" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Seleccionar Paciente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control mb-3" id="filtroPaciente" onkeyup="ejecutarBusquedaPaciente()" placeholder="Nombre o DNI...">
+                <table class="table table-hover">
+                    <thead><tr><th>DNI</th><th>Nombres</th><th>Acción</th></tr></thead>
+                    <tbody id="tablaPacientes"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalMedicos" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Seleccionar Médico</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control mb-3" id="filtroMedico" onkeyup="ejecutarBusquedaMedico()" placeholder="Nombre o Especialidad...">
+                <table class="table table-hover">
+                    <thead><tr><th>Médico</th><th>Especialidad</th><th>Acción</th></tr></thead>
+                    <tbody id="tablaMedicos"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/citas.js"></script>
+}

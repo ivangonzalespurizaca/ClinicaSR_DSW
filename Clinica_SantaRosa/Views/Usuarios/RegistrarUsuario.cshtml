@@ -1,0 +1,136 @@
+﻿@model ClinicaSR.BL.BE.UsuarioBE
+@{
+    Layout = "_LayoutAdministrador"; // O el nombre de tu layout principal
+}
+
+@section Styles {
+    <style>
+        /* Mantenemos tus estilos personalizados aquí */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+        }
+
+        .header-bar {
+            background-color: #007bff;
+            color: white;
+            border-radius: 12px;
+            padding: 15px 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .card-form {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .preview-img {
+            display: none;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+    </style>
+}
+
+<div class="container mt-4">
+    <div class="header-bar">
+        <h2><i class="bi bi-person-plus-fill me-2"></i>Registro de Usuario</h2>
+    </div>
+
+    <div class="card-form shadow-sm">
+        <form asp-action="Registro" asp-controller="Usuarios" method="post" enctype="multipart/form-data" class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Nombre de Usuario</label>
+                <input asp-for="Username" class="form-control" placeholder="Ej: admin01" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Contraseña</label>
+                <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Contraseña" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Nombres</label>
+                <input asp-for="Nombres" class="form-control" placeholder="Nombres" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Apellidos</label>
+                <input asp-for="Apellidos" class="form-control" placeholder="Apellidos" required>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label font-weight-bold">DNI</label>
+                <input asp-for="DNI" class="form-control" placeholder="DNI" required maxlength="8">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label font-weight-bold">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" placeholder="Teléfono">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label font-weight-bold">Rol</label>
+                <select asp-for="Rol" class="form-select">
+                    <option value="RECEPCIONISTA">RECEPCIONISTA</option>
+                    <option value="CAJERO">CAJERO</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Correo</label>
+                <input asp-for="Correo" type="email" class="form-control" placeholder="correo@ejemplo.com">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label font-weight-bold">Foto de Perfil</label>
+                <input type="file" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center flex-column my-4">
+                <img id="preview" class="preview-img" alt="Vista previa">
+                <small class="text-muted mt-2">Vista previa de la imagen</small>
+            </div>
+
+            <div class="col-12 d-flex gap-3">
+                <a asp-controller="Home" asp-action="PanelAdministrador" class="btn btn-secondary w-50 py-2">Cancelar</a>
+                <button type="submit" class="btn btn-primary w-50 py-2">Registrar Usuario</button>
+                <a asp-action="EditarUsuario" class="btn btn-secondary w-50 py-2">Editar Usuarios</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Capturar mensajes del servidor
+        const successMsg = '@TempData["Success"]';
+        const errorMsg = '@ViewBag.Error';
+
+        if (successMsg) Swal.fire("¡Éxito!", successMsg, "success");
+        if (errorMsg) Swal.fire("Error", errorMsg, "error");
+
+        // Previsualización de imagen (FileReader)
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

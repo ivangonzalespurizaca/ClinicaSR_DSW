@@ -199,25 +199,55 @@ namespace ClinicaSR.DL.DALC
 
             return paciente;
         }
-
-        public bool ActualizarPaciente(PacienteBE pacienteBE)
+        public List<PacienteBE> BuscarPorCriterio(string criterio)
         {
-            throw new NotImplementedException();
+            List<PacienteBE> lista = new List<PacienteBE>();
+
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Paciente_Buscar", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Definición explícita del parámetro
+                SqlParameter param = new SqlParameter("@Criterio", SqlDbType.VarChar, 100);
+                param.Value = (object)criterio ?? DBNull.Value;
+                cmd.Parameters.Add(param);
+
+                try
+                {
+                    con.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            lista.Add(MapearPaciente(dr));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Loguear el error antes de lanzar la excepción
+                    throw new Exception("Error en PacienteDALC.BuscarPorCriterio: " + ex.Message);
+                }
+            }
+            return lista;
         }
 
-        public bool EliminarPaciente(int idPaciente)
+        private PacienteBE MapearPaciente(SqlDataReader dr)
         {
-            throw new NotImplementedException();
+            PacienteBE paciente = new PacienteBE();
+
+            // Mapeo siguiendo el estándar de GetOrdinal para mayor seguridad
+            paciente.ID_Paciente = dr.GetInt64(dr.GetOrdinal("ID_Paciente"));
+            paciente.Nombres = dr["Nombres"].ToString();
+            paciente.Apellidos = dr["Apellidos"].ToString();
+            paciente.DNI = dr["DNI"].ToString();
+
+            // Manejo de nulos para el teléfono
+            paciente.Telefono = dr["Telefono"] == DBNull.Value ? "" : dr["Telefono"].ToString();
+
+            return paciente;
         }
 
-        public PacienteBE BuscarPacientePorId(int idPaciente)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PacienteBE RegistrarPaciente(PacienteBE pacienteBE)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

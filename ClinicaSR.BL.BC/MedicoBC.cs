@@ -25,9 +25,20 @@ namespace ClinicaSR.BL.BC
             return medicoDALC.Actualizar(medicoBE);
         }
 
+        public List<MedicoBE> BuscarMedicos(string filtro)
+        {
+            return medicoDALC.BuscarMedicos(filtro);
+        }
+
         public bool EliminarMedico(int id)
         {
             return medicoDALC.Eliminar(id);
         }
+
+        public MedicoBE ObtenerPorId(long idMedico)
+        {
+            return medicoDALC.ObtenerPorId(idMedico);
+        }
+
     }
 }
