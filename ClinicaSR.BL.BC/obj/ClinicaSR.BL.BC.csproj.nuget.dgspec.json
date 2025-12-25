@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj": {}
+    "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj": {}
   },
   "projects": {
-    "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj": {
+    "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
+        "projectUniqueName": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
         "projectName": "ClinicaSR.BL.BC",
-        "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
-        "packagesPath": "C:\\Users\\Iván\\.nuget\\packages\\",
-        "outputPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\obj\\",
+        "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\ClinicaSR.BL.BC.csproj",
+        "packagesPath": "C:\\Users\\Jhon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Iván\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jhon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,18 +26,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
-                "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj"
+              "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
+                "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj"
               },
-              "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj": {
-                "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj"
+              "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj": {
+                "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj"
               }
             }
           }
@@ -73,24 +72,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
+    "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+        "projectUniqueName": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
         "projectName": "ClinicaSR.BL.BE",
-        "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
-        "packagesPath": "C:\\Users\\Iván\\.nuget\\packages\\",
-        "outputPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\obj\\",
+        "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj",
+        "packagesPath": "C:\\Users\\Jhon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Iván\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jhon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -99,7 +98,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -139,24 +137,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj": {
+    "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
+        "projectUniqueName": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
         "projectName": "ClinicaSR.DL.DALC",
-        "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
-        "packagesPath": "C:\\Users\\Iván\\.nuget\\packages\\",
-        "outputPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\obj\\",
+        "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\ClinicaSR.DL.DALC.csproj",
+        "packagesPath": "C:\\Users\\Jhon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.DL.DALC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Iván\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jhon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -165,15 +163,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
-                "projectPath": "D:\\WS_ProyectoDSW01\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj"
+              "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj": {
+                "projectPath": "C:\\Users\\Jhon\\Documents\\DSW\\ClinicaSR_DSW\\ClinicaSR.BL.BE\\ClinicaSR.BL.BE.csproj"
               }
             }
           }
@@ -223,7 +220,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
