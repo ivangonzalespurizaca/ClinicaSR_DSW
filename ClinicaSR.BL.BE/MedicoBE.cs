@@ -13,6 +13,7 @@ namespace ClinicaSR.BL.BE
         public string Nro_Colegiatura { get; set; }
         public string Telefono { get; set; }
         public EspecialidadBE EspecialidadBE { get; set; }
+        public bool TieneCitas { get; set; }
 
         public MedicoBE()
         {

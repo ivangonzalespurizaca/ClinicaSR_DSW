@@ -10,5 +10,7 @@ namespace ClinicaSR.BL.BE
         public long ID_Especialidad { get; set; }
         public string Nombre { get; set; }
 
+        public bool TieneCitas { get; set; }
+
     }
 }

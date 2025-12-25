@@ -27,7 +27,7 @@ namespace ClinicaSR.DL.DALC
                     {
                         EspecialidadBE esp = new EspecialidadBE
                         {
-                            ID_Especialidad = dr.GetInt32(0),
+                            ID_Especialidad = Convert.ToInt32(dr.GetInt64(0)),
                             Nombre = dr.GetString(1)
                         };
                         lista.Add(esp);
@@ -45,6 +45,7 @@ namespace ClinicaSR.DL.DALC
 
             return lista;
         }
+
 
         // 2. Insertar especialidad
         public int Insertar(EspecialidadBE especialidadBE)

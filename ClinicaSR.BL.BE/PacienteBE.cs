@@ -13,5 +13,6 @@ namespace ClinicaSR.BL.BE
         public DateTime? Fecha_Nacimiento { get; set; }
         public string? Telefono { get; set; }
 
+        public bool TieneCitas { get; set; }
     }
 }

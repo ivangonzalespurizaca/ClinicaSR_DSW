@@ -11,30 +11,25 @@ namespace ClinicaSR.DL.DALC
     {
         public PacienteBE registrarPaciente(PacienteBE pacienteBE)
         {
-            using (SqlConnection con = ConexionDALC.GetConnectionBDSeg())
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Registrar_Paciente", con);
+                SqlCommand cmd = new SqlCommand("USP_InsertarPaciente", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // Parámetros de entrada
                 cmd.Parameters.AddWithValue("@Nombres", pacienteBE.Nombres);
                 cmd.Parameters.AddWithValue("@Apellidos", pacienteBE.Apellidos);
                 cmd.Parameters.AddWithValue("@DNI", pacienteBE.DNI);
-                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_Nacimiento);
-                cmd.Parameters.AddWithValue("@Telefono", (object)pacienteBE.Telefono ?? DBNull.Value);
-
-                // Parámetro de salida
-                SqlParameter idSalida = new SqlParameter("@ID_Paciente", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                };
-                cmd.Parameters.Add(idSalida);
+                cmd.Parameters.AddWithValue("@Fecha_Nacimiento",
+                    (object)pacienteBE.Fecha_Nacimiento ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Telefono",
+                    (object)pacienteBE.Telefono ?? DBNull.Value);
 
                 try
                 {
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                    pacienteBE.ID_Paciente = Convert.ToInt32(idSalida.Value);
+
+                    // Devuelve el ID generado por SCOPE_IDENTITY()
+                    pacienteBE.ID_Paciente = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 catch (Exception ex)
                 {
@@ -42,17 +37,20 @@ namespace ClinicaSR.DL.DALC
                 }
             }
 
+            // 👇 ESTO FALTABA
             return pacienteBE;
         }
 
-        // 2. Listar pacientes
+
+       
+        // 2. Listar pacientes YA TA
         public List<PacienteBE> ListarPacientes()
         {
             List<PacienteBE> lista = new List<PacienteBE>();
 
             using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Listar_Pacientes", con);
+                SqlCommand cmd = new SqlCommand("USP_ListarPacientes", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader dr = null;
 
@@ -64,15 +62,22 @@ namespace ClinicaSR.DL.DALC
                     {
                         PacienteBE paciente = new PacienteBE
                         {
-                            ID_Paciente = dr.GetInt32(0),
-                            Nombres = dr.GetString(1),
-                            Apellidos = dr.GetString(2),
-                            DNI = dr.GetString(3),
-                            Fecha_Nacimiento = dr.GetDateTime(4),
-                            Telefono = dr.IsDBNull(5) ? null : dr.GetString(5)
+                            ID_Paciente = Convert.ToInt64(dr["ID_Paciente"]),
+                            Nombres = dr["Nombres"].ToString(),
+                            Apellidos = dr["Apellidos"].ToString(),
+                            Telefono = dr["Telefono"] == DBNull.Value
+                                            ? null
+                                            : dr["Telefono"].ToString(),
+                            DNI = dr["DNI"].ToString(),
+                            Fecha_Nacimiento = dr["Fecha_Nacimiento"] == DBNull.Value
+                                            ? (DateTime?)null
+                                            : Convert.ToDateTime(dr["Fecha_Nacimiento"]),
+                            TieneCitas = Convert.ToBoolean(dr["TieneCitas"])
                         };
+
                         lista.Add(paciente);
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -87,43 +92,41 @@ namespace ClinicaSR.DL.DALC
             return lista;
         }
 
-        // 3. Actualizar paciente
-        public bool actualizarPaciente(PacienteBE pacienteBE)
-        {
-            bool actualizado = false;
 
+        // 3. Actualizar paciente
+        
+        public bool ActualizarPaciente(PacienteBE pacienteBE)
+        {
             using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Actualizar_Paciente", con);
+                SqlCommand cmd = new SqlCommand("USP_ActualizarPaciente", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@ID_Paciente", pacienteBE.ID_Paciente);
                 cmd.Parameters.AddWithValue("@Nombres", pacienteBE.Nombres);
                 cmd.Parameters.AddWithValue("@Apellidos", pacienteBE.Apellidos);
                 cmd.Parameters.AddWithValue("@DNI", pacienteBE.DNI);
-                cmd.Parameters.AddWithValue("@Fecha_nacimiento", pacienteBE.Fecha_Nacimiento);
-                cmd.Parameters.AddWithValue("@Telefono", (object)pacienteBE.Telefono ?? DBNull.Value);
-
-                SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
-                {
-                    Direction = ParameterDirection.Output
-                };
-                cmd.Parameters.Add(result);
+                cmd.Parameters.AddWithValue("@Fecha_Nacimiento",
+                    (object)pacienteBE.Fecha_Nacimiento ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Telefono",
+                    (object)pacienteBE.Telefono ?? DBNull.Value);
 
                 try
                 {
+
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                    actualizado = Convert.ToBoolean(result.Value);
+                    int filas = Convert.ToInt32(cmd.ExecuteScalar());
+                    return filas > 0;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error al actualizar paciente: " + ex.Message);
+                    return false;
                 }
             }
-
-            return actualizado;
         }
+
+
 
         // 4. Eliminar paciente
         public bool eliminarPaciente(int idPaciente)
@@ -158,38 +161,41 @@ namespace ClinicaSR.DL.DALC
             return eliminado;
         }
 
+
         // 5. Buscar paciente por ID
-        public PacienteBE buscarPacientePorId(int idPaciente)
+        public PacienteBE ObtenerPacientePorId(long idPaciente)
         {
             PacienteBE paciente = null;
 
             using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Obtener_Paciente_PorID", con);
+                SqlCommand cmd = new SqlCommand("USP_ObtenerPacientePorId", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ID_Paciente", idPaciente);
 
-                SqlDataReader dr = null;    
+                SqlDataReader dr = null;
+
                 try
                 {
                     con.Open();
                     dr = cmd.ExecuteReader();
+
                     if (dr.Read())
                     {
                         paciente = new PacienteBE
                         {
-                            ID_Paciente = dr.GetInt32(0),
+                            ID_Paciente = dr.GetInt64(0),
                             Nombres = dr.GetString(1),
                             Apellidos = dr.GetString(2),
                             DNI = dr.GetString(3),
-                            Fecha_Nacimiento = dr.GetDateTime(4),
+                            Fecha_Nacimiento = dr.IsDBNull(4) ? null : dr.GetDateTime(4),
                             Telefono = dr.IsDBNull(5) ? null : dr.GetString(5)
                         };
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al buscar paciente por ID: " + ex.Message);
+                    Console.WriteLine("Error al obtener paciente: " + ex.Message);
                 }
                 finally
                 {
@@ -199,6 +205,9 @@ namespace ClinicaSR.DL.DALC
 
             return paciente;
         }
+
+
+
         public List<PacienteBE> BuscarPorCriterio(string criterio)
         {
             List<PacienteBE> lista = new List<PacienteBE>();
@@ -248,6 +257,10 @@ namespace ClinicaSR.DL.DALC
 
             return paciente;
         }
+
+
+
+
 
     }
 }

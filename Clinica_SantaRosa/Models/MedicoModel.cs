@@ -25,7 +25,7 @@ namespace Clinica_SantaRosa.PL.WebApp.Models
 
         public MedicoBE obtenerxid(int id)
         {
-               return medicobc.BuscarMedicoPorId(id);
+               return medicobc.ObtenerPorId(id);
         }
 
         public bool eliminar(int id)

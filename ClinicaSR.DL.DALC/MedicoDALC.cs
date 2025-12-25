@@ -15,7 +15,7 @@ namespace ClinicaSR.DL.DALC
 
             using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Listar_Medicos", con);
+                SqlCommand cmd = new SqlCommand("USP_ListarMedico", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader dr = null;
 
@@ -27,18 +27,20 @@ namespace ClinicaSR.DL.DALC
                     {
                         MedicoBE medico = new MedicoBE
                         {
-                            ID_Medico = dr.GetInt32(0),
-                            Nombres = dr.GetString(1),
-                            Apellidos = dr.GetString(2),
-                            DNI = dr.GetString(3),
-                            Nro_Colegiatura = dr.GetString(4),
-                            Telefono = dr.IsDBNull(5) ? null : dr.GetString(5),
+                            ID_Medico = Convert.ToInt64(dr["ID_Medico"]),
+                            Nombres = dr["Nombres"].ToString(),
+                            Apellidos = dr["Apellidos"].ToString(),
+                            DNI = dr["DNI"].ToString(),
+                            Nro_Colegiatura = dr["Nro_Colegiatura"].ToString(),
+                            Telefono = dr["Telefono"] == DBNull.Value ? null : dr["Telefono"].ToString(),
                             EspecialidadBE = new EspecialidadBE
                             {
-                                ID_Especialidad = dr.GetInt32(6),
-                                Nombre = dr.GetString(7)
-                            }
+                                Nombre = dr["EspecialidadNombre"].ToString() // ← corregido
+                            },
+                            TieneCitas = Convert.ToBoolean(dr["TieneCitas"])
+
                         };
+
                         lista.Add(medico);
                     }
                 }
@@ -164,6 +166,7 @@ namespace ClinicaSR.DL.DALC
 
             return eliminado;
         }
+
 
         public List<MedicoBE> BuscarMedicos(string filtro)
         {
