@@ -51,7 +51,7 @@ GO
 CREATE TABLE Horarios_Atencion (
     ID_Horario BIGINT IDENTITY(1,1) PRIMARY KEY,
     ID_Medico BIGINT NOT NULL,
-    Dia_Semana VARCHAR(9) CHECK (Dia_Semana IN ('LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO')) NOT NULL,
+    Dia_Semana VARCHAR(9) CHECK (Dia_Semana IN ('DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO')) NOT NULL,
     Horario_Entrada TIME NOT NULL,
     Horario_Salida TIME NOT NULL,
     FOREIGN KEY (ID_MEDICO) REFERENCES Medico(ID_Medico),
@@ -89,9 +89,9 @@ GO
 
 INSERT INTO Medico (Nombres, Apellidos, DNI, Nro_Colegiatura, Telefono, ID_Especialidad)
 VALUES 
-	('Juan', 'P rez', '12345678', '1234-5678', '987654321', 1),  
-	('Ana', 'Mart nez', '23456789', '2345-6789', '987654322', 2),  
-	('Carlos', 'G mez', '34567890', '3456-7890', '987654323', 3)
+	('Juan', 'Perez', '12345678', '1234-5678', '987654321', 1),  
+	('Ana', 'Martinez', '23456789', '2345-6789', '987654322', 2),  
+	('Carlos', 'Gomez', '34567890', '3456-7890', '987654323', 3)
 GO
 
 INSERT INTO Paciente (Nombres, Apellidos, DNI, Fecha_Nacimiento, Telefono)
@@ -126,5 +126,12 @@ VALUES
 	(3, 3, 'Mar a', 'L pez', '67890123', '977777777', 150.00, 'TRANSFERENCIA', 'EMITIDO')
 GO
 
---DROP DATABASE BDHospital
---GO
+DROP DATABASE BDHospital
+GO
+
+ALTER DATABASE BDHospital set single_user with rollback immediate
+go
+
+USE MASTER
+GO
+

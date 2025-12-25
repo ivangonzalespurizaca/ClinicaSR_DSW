@@ -9,36 +9,63 @@ namespace ClinicaSR.DL.DALC
 {
     public class HorarioAtencionDALC
     {
-       
-            // 1. Listar horarios
-            public List<HorarioAtencionBE> ListarHorarios()
+        public bool InsertarHorario(HorarioAtencionBE entidad)
+        {
+            bool exito = false;
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Horario_Registrar", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ID_Medico", entidad.MedicoBE.ID_Medico);
+                cmd.Parameters.AddWithValue("@Dia_Semana", entidad.Dia_Semana.ToString());
+                cmd.Parameters.AddWithValue("@Horario_Entrada", entidad.Horario_Entrada);
+                cmd.Parameters.AddWithValue("@Horario_Salida", entidad.Horario_Salida);
+                try
+                {
+                    con.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    exito = filasAfectadas > 0;
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error técnico al registrar el horario: " + ex.Message);
+                }
+            }
+            return exito;
+        }
+
+        public List<HorarioAtencionBE> ListarHorariosPorMedico(long idMedico)
             {
                 List<HorarioAtencionBE> lista = new List<HorarioAtencionBE>();
 
                 using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
                 {
-                    SqlCommand cmd = new SqlCommand("USP_Listar_Horarios", con);
+                    SqlCommand cmd = new SqlCommand("USP_Horarios_ListarPorMedico", con);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID_Medico", idMedico);
+
                     SqlDataReader dr = null;
 
                     try
                     {
                         con.Open();
                         dr = cmd.ExecuteReader();
+
                         while (dr.Read())
                         {
                             HorarioAtencionBE horario = new HorarioAtencionBE
                             {
-                                ID_Horario = dr.GetInt32(0),
-                                MedicoBE = new MedicoBE
-                                {
-                                    ID_Medico = dr.GetInt32(1),
-                                    Nombres = dr.GetString(2),
-                                    Apellidos = dr.GetString(3)
-                                },
-                                Dia_Semana = (DiaSemana)Enum.Parse(typeof(DiaSemana), dr.GetString(4)),
-                                Horario_Entrada = dr.GetTimeSpan(5),
-                                Horario_Salida = dr.GetTimeSpan(6)
+                                ID_Horario = dr.GetInt64(0),
+                                Dia_Semana = (DiaSemana)Enum.Parse(typeof(DiaSemana), dr.GetString(1).Trim().ToUpper(), true),
+                                Horario_Entrada = dr.GetTimeSpan(dr.GetOrdinal("Horario_Entrada")),
+                                Horario_Salida = dr.GetTimeSpan(dr.GetOrdinal("Horario_Salida")),
+
+                                MedicoBE = new MedicoBE { ID_Medico = idMedico }
                             };
                             lista.Add(horario);
                         }
@@ -52,133 +79,84 @@ namespace ClinicaSR.DL.DALC
                         if (dr != null && !dr.IsClosed) dr.Close();
                     }
                 }
-
                 return lista;
             }
 
-            // 2. Registrar horario
-            public HorarioAtencionBE registrarHorario(HorarioAtencionBE horarioBE)
-            {
-                using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
-                {
-                    SqlCommand cmd = new SqlCommand("USP_Insertar_Horario", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@MedicoID", horarioBE.MedicoBE.ID_Medico);
-                    cmd.Parameters.AddWithValue("@Dia_Semana", horarioBE.Dia_Semana.ToString());
-                    cmd.Parameters.AddWithValue("@Horario_Entrada", horarioBE.Horario_Entrada);
-                    cmd.Parameters.AddWithValue("@Horario_Salida", horarioBE.Horario_Salida);
-
-                    SqlParameter idSalida = new SqlParameter("@ID_Horario", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(idSalida);
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        horarioBE.ID_Horario = Convert.ToInt32(idSalida.Value);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error al registrar horario: " + ex.Message);
-                        horarioBE = null;
-                    }
-                }
-
-                return horarioBE;
-            }
-
-            // 3. Editar horario
-            public HorarioAtencionBE editarHorario(HorarioAtencionBE horarioBE)
-            {
-                using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
-                {
-                    SqlCommand cmd = new SqlCommand("USP_Actualizar_Horario", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@ID_Horario", horarioBE.ID_Horario);
-                    cmd.Parameters.AddWithValue("@MedicoID", horarioBE.MedicoBE.ID_Medico);
-                    cmd.Parameters.AddWithValue("@Dia_Semana", horarioBE.Dia_Semana.ToString());
-                    cmd.Parameters.AddWithValue("@Horario_Entrada", horarioBE.Horario_Entrada);
-                    cmd.Parameters.AddWithValue("@Horario_Salida", horarioBE.Horario_Salida);
-
-                    SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(result);
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        if (!Convert.ToBoolean(result.Value))
-                            horarioBE = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error al editar horario: " + ex.Message);
-                        horarioBE = null;
-                    }
-                }
-
-                return horarioBE;
-            }
-
-            // 4. Eliminar horario
-            public bool eliminarHorarioPorId(int idHorario)
-            {
-                bool eliminado = false;
-
-                using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
-                {
-                    SqlCommand cmd = new SqlCommand("USP_Eliminar_Horario", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@ID_Horario", idHorario);
-
-                    SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(result);
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        eliminado = Convert.ToBoolean(result.Value);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error al eliminar horario: " + ex.Message);
-                    }
-                }
-
-                return eliminado;
-            }
-
-        public void EliminarHorarioPorId(int idHorario)
+        public void EliminarHorario(long idHorario)
         {
-            throw new NotImplementedException();
+            bool exito = false;
+
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Horario_Eliminar", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ID_Horario", idHorario);
+
+                try
+                {
+                    con.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    exito = filasAfectadas > 0;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error técnico al eliminar el horario: " + ex.Message);
+                }
+            }
         }
 
-        public HorarioAtencionBE EditarHorario(HorarioAtencionBE horarioBE)
+        public DisponibilidadMedicaBE VerificarDisponibilidad(long idMedico, DateTime fecha)
         {
-            throw new NotImplementedException();
+            DisponibilidadMedicaBE disponibilidad = new DisponibilidadMedicaBE();
+
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Horario_VerificarDisponibilidad", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ID_Medico", idMedico);
+                cmd.Parameters.AddWithValue("@Fecha", fecha);
+
+                SqlDataReader dr = null;
+
+                try
+                {
+                    con.Open();
+                    dr = cmd.ExecuteReader();
+
+                    // --- PRIMER RESULTADO: Horarios de atención configurados ---
+                    while (dr.Read())
+                    {
+                        disponibilidad.HorariosConfigurados.Add(new HorarioAtencionBE
+                        {
+                            ID_Horario = dr.GetInt64(dr.GetOrdinal("ID_Horario")),
+                            Horario_Entrada = (TimeSpan)dr["Horario_Entrada"],
+                            Horario_Salida = (TimeSpan)dr["Horario_Salida"]
+                        });
+                    }
+
+                    // --- SEGUNDO RESULTADO: Citas ya ocupadas ---
+                    // NextResult() mueve el puntero al siguiente SELECT del SP
+                    if (dr.NextResult())
+                    {
+                        while (dr.Read())
+                        {
+                            disponibilidad.HorasOcupadas.Add((TimeSpan)dr["Hora_Cita"]);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error en HorarioAtencionDALC.VerificarDisponibilidad: " + ex.Message);
+                }
+                finally
+                {
+                    if (dr != null && !dr.IsClosed) dr.Close();
+                }
+            }
+            return disponibilidad;
         }
 
-        public HorarioAtencionBE RegistrarHorario(HorarioAtencionBE horarioBE)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        
     }
     }
 

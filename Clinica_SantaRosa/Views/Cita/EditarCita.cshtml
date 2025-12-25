@@ -1,0 +1,124 @@
+﻿@model ClinicaSR.BL.BE.CitaBE
+@{
+    Layout = "_LayoutRecepcionista";
+}
+
+<div class="container mt-4">
+    <div class="header-bar mb-4">
+        <h2><i class="bi bi-pencil-square me-2"></i>Editar Cita #@Model.ID_Cita</h2>
+    </div>
+
+    <div class="card-form shadow-sm p-4 bg-white rounded-3">
+        <form id="formCita">
+            <input type="hidden" id="citaId" asp-for="ID_Cita" />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-person me-1"></i>Paciente</label>
+                    <input type="text" id="pacienteNombre" class="form-control bg-light"
+                           value="@Model.PacienteBE.Nombres @Model.PacienteBE.Apellidos" readonly />
+                    <input type="hidden" id="pacienteId" asp-for="PacienteBE.ID_Paciente" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-person-badge me-1"></i>Médico</label>
+                    <input type="text" id="medicoNombre" class="form-control bg-light"
+                           value="@Model.MedicoBE.Nombres @Model.MedicoBE.Apellidos" readonly />
+                    <input type="hidden" id="medicoId" asp-for="MedicoBE.ID_Medico" />
+
+                    <div id="contenedorHorariosRegulares" class="mt-2">
+                        <small class="text-muted fw-bold">Horarios de atención habituales:</small>
+                        <div id="listaHorariosRegulares" class="border rounded p-2 bg-light" style="font-size: 0.85rem;">
+                            <span class="text-muted">Cargando horarios...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-calendar-event me-1"></i>Fecha</label>
+                    <input type="date" asp-for="Fecha_Cita" class="form-control" id="fechaCita"
+                           value="@Model.Fecha_Cita.ToString("yyyy-MM-dd")"
+                           min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label font-weight-bold"><i class="bi bi-clock me-1"></i>Hora</label>
+                    <select id="horaCita" asp-for="Hora_Cita" class="form-select" required>
+                        <option value="@Model.Hora_Cita.ToString(@"hh\:mm")">@Model.Hora_Cita.ToString(@"hh\:mm") (Actual)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label font-weight-bold"><i class="bi bi-pencil-square me-1"></i>Motivo</label>
+                <textarea asp-for="Motivo" id="motivo" class="form-control" rows="3">@Model.Motivo</textarea>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-action="Listar" class="btn btn-secondary px-5">Cancelar</a>
+                <button type="button" onclick="confirmarActualizacion()" class="btn btn-primary px-5">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/citas.js"></script>
+    <script>
+        // Lógica de inicialización específica para Edición
+        document.addEventListener("DOMContentLoaded", function () {
+            const idMed = document.getElementById("medicoId").value;
+
+            if (idMed) {
+                // 1. Cargamos el panel de horarios habituales del médico
+                cargarHorariosRegulares(idMed);
+
+                // 2. Cargamos la disponibilidad de horas para la fecha actual de la cita
+                actualizarDisponibilidad();
+            }
+        });
+
+        // Función para enviar la actualización (BC -> DALC -> SQL)
+        async function confirmarActualizacion() {
+            const btn = document.querySelector("button[onclick='confirmarActualizacion()']");
+
+            const cita = {
+                ID_Cita: parseInt(document.getElementById("citaId").value),
+                Fecha_Cita: document.getElementById("fechaCita").value,
+                Hora_Cita: document.getElementById("horaCita").value,
+                Motivo: document.getElementById("motivo").value
+            };
+
+            if (!cita.Fecha_Cita || !cita.Hora_Cita || !cita.Motivo) {
+                Swal.fire("Atención", "Complete fecha, hora y motivo.", "warning");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = "Actualizando...";
+
+            fetch('/Cita/Actualizar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cita)
+            })
+            .then(async res => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.message || "Error al actualizar");
+                return data;
+            })
+            .then(exito => {
+                Swal.fire("Éxito", "Cita reprogramada correctamente.", "success")
+                    .then(() => window.location.href = "/Cita/Listar");
+            })
+            .catch(err => {
+                btn.disabled = false;
+                btn.innerHTML = "Guardar Cambios";
+                Swal.fire("Error", err.message, "error");
+            });
+        }
+    </script>
+}

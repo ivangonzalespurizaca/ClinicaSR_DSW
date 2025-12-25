@@ -139,15 +139,34 @@
             <button type="submit" class="btn btn-login">
                 Iniciar sesión
             </button>
-
-            @if (TempData["ErrorLogin"] != null)
-            {
-                <div class="alert alert-danger mt-3 py-2">
-                    @TempData["ErrorLogin"]
-                </div>
-            }
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        
+        // 1. Capturar mensajes de error (Login fallido)
+        const errorLogin = '@TempData["ErrorLogin"]';
 
+        // 2. Capturar mensajes de éxito/info (Cierre de sesión por actualización de perfil)
+        const successMsg = '@TempData["Success"]';
+
+        if (errorLogin) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Acceso Denegado',
+                text: errorLogin,
+                confirmButtonColor: '#007bff'
+            });
+        }
+
+        if (successMsg) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Sesión Finalizada',
+                text: successMsg,
+                confirmButtonColor: '#007bff'
+            });
+        }
+    </script>
 </body>
 </html>

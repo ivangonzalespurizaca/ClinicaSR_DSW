@@ -11,16 +11,23 @@ namespace ClinicaSR.BL.BE
         public DiaSemana Dia_Semana { get; set; }
         public TimeSpan Horario_Entrada { get; set; }
         public TimeSpan Horario_Salida { get; set; }
+
+        public HorarioAtencionBE()
+        {
+            MedicoBE = new MedicoBE();
+        }
     }
+
 
     public enum DiaSemana
     {
-        LUNES,
-        MARTES,
-        MIERCOLES,
-        JUEVES,
-        VIERNES,
-        SABADO,
-        DOMINGO
+        DOMINGO = 0,
+        LUNES = 1,
+        MARTES = 2,
+        MIERCOLES = 3,
+        JUEVES = 4,
+        VIERNES = 5,
+        SABADO = 6,
+        
     }
 }

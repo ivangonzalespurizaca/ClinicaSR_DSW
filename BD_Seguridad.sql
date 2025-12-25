@@ -36,3 +36,6 @@ GO
 
 SELECT * FROM usuario
 go
+
+--alter database BDSeg set single_user with rollback immediate
+--go

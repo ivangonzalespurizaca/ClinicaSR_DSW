@@ -1,0 +1,147 @@
+﻿@model ClinicaSR.BL.BE.UsuarioBE
+@{
+    Layout = "_LayoutAdministrador";
+}
+
+@section Styles {
+    <style>
+        /* Mantenemos tus estilos de Poppins y Card-form aquí */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+        }
+
+        .card-form {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .card-header-custom {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+            border-radius: 16px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .preview-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .btn-uniforme {
+            height: calc(1.8em + 0.75rem + 2px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary fw-bold mb-4">Buscar y Editar Usuario</h2>
+
+    <div class="card-form mb-4">
+        <form asp-action="EditarUsuario" method="get" class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <input type="text" name="nombreBusqueda" placeholder="Ingrese nombre de usuario" class="form-control" required />
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100 btn-uniforme">Buscar</button>
+            </div>
+            <div class="col-md-3">
+                <a asp-action="RegistrarUsuario" class="btn btn-secondary w-100 btn-uniforme">Regresar</a>
+            </div>
+        </form>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="card-form">
+            <div class="card-header-custom">
+                <i class="bi bi-pencil-square"></i> Editar Usuario: @Model.Username
+            </div>
+            <div class="card-body">
+                <form asp-action="Actualizar" method="post" enctype="multipart/form-data" class="row g-3">
+                    <input type="hidden" asp-for="ID_Usuario" />
+                    <input type="hidden" asp-for="Img_Perfil" />
+
+                    <div class="col-md-6">
+                        <label class="form-label">Usuario</label>
+                        <input asp-for="Username" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nombres</label>
+                        <input asp-for="Nombres" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Apellidos</label>
+                        <input asp-for="Apellidos" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">DNI</label>
+                        <input asp-for="DNI" class="form-control" required maxlength="8" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono</label>
+                        <input asp-for="Telefono" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Correo</label>
+                        <input asp-for="Correo" type="email" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Nueva Contraseña (Opcional)</label>
+                        <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Dejar en blanco para no cambiar" />
+                    </div>
+
+                    <div class="col-md-12 text-center my-4">
+                        <label class="form-label d-block">Foto de Perfil Actual</label>
+                        <img id="preview" src="@(string.IsNullOrEmpty(Model.Img_Perfil) ? "/images/default-user.jpg" : Model.Img_Perfil)"
+                             class="preview-img mb-3">
+
+                        <div class="mx-auto" style="max-width: 400px;">
+                            <input type="file" id="archivoImagen" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex gap-3 mt-3">
+                        <button type="submit" class="btn btn-primary w-50 py-2">Actualizar Usuario</button>
+                        <a asp-action="Home" class="btn btn-secondary w-50 py-2">Volver al panel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const success = '@TempData["Success"]';
+        const error = '@ViewBag.Error';
+        if (success) Swal.fire("¡Éxito!", success, "success");
+        if (error) Swal.fire("Error", error, "error");
+
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

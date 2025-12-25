@@ -155,7 +155,7 @@
                 <i class="bi bi-person-lines-fill fs-1 text-primary"></i>
                 <h4>Gestionar Usuarios</h4>
                 <p>Administra las cuentas del sistema.</p>
-                <a asp-controller="Usuarios" asp-action="Index" class="btn btn-primary rounded-pill">
+                <a asp-controller="Usuarios" asp-action="RegistrarUsuario" class="btn btn-primary rounded-pill">
                     Ingresar
                 </a>
             </div>
@@ -173,7 +173,7 @@
                 <i class="bi bi-clock-history fs-1 text-primary"></i>
                 <h4>Gestionar Horarios</h4>
                 <p>Configura horarios de atención.</p>
-                <a asp-controller="Horarios" asp-action="Index" class="btn btn-primary rounded-pill">
+                <a asp-controller="Horario" asp-action="Gestionar" class="btn btn-primary rounded-pill">
                     Ingresar
                 </a>
             </div>
@@ -193,6 +193,14 @@
     <footer>
         © 2025 Clínica Santa Rosa — Sistema de Gestión Hospitalaria
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Capturar mensajes del servidor
+        const successMsg = '@TempData["Success"]';
+        const errorMsg = '@ViewBag.Error';
 
+        if (successMsg) Swal.fire("¡Éxito!", successMsg, "success");
+        if (errorMsg) Swal.fire("Error", errorMsg, "error");
+    </script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+﻿@model ClinicaSR.BL.BE.CitaBE
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-6">
+            <label class="fw-bold text-muted small uppercase">Información del Paciente</label>
+            <p class="mb-1"><i class="bi bi-person-fill me-2"></i>@Model.PacienteBE.Nombres</p>
+            <p class="text-secondary"><i class="bi bi-card-text me-2"></i>DNI: @Model.PacienteBE.DNI</p>
+        </div>
+        <div class="col-6 border-start">
+            <label class="fw-bold text-muted small uppercase">Información del Médico</label>
+            <p class="mb-1"><i class="bi bi-heart-pulse-fill me-2 text-danger"></i>@Model.MedicoBE.Nombres</p>
+            <p class="text-secondary"><i class="bi bi-patch-check me-2"></i>@Model.MedicoBE.EspecialidadBE.Nombre</p>
+        </div>
+    </div>
+    <hr />
+    <div class="row mb-3">
+        <div class="col-4 text-center">
+            <label class="fw-bold d-block">Fecha</label>
+            <span class="badge bg-light text-dark border p-2 w-100">
+                <i class="bi bi-calendar3 me-1"></i> @Model.Fecha_Cita.ToString("dd/MM/yyyy")
+            </span>
+        </div>
+        <div class="col-4 text-center">
+            <label class="fw-bold d-block">Hora</label>
+            <span class="badge bg-light text-dark border p-2 w-100">
+                <i class="bi bi-clock me-1"></i> @Model.Hora_Cita.ToString(@"hh\:mm")
+            </span>
+        </div>
+        <div class="col-4 text-center">
+            <label class="fw-bold d-block">Estado</label>
+            @{
+                var color = Model.Estado == ClinicaSR.BL.BE.EstadoCita.CONFIRMADO ? "success" :
+                (Model.Estado == ClinicaSR.BL.BE.EstadoCita.PENDIENTE ? "warning" : "danger");
+            }
+            <span class="badge bg-@color p-2 w-100">@Model.Estado</span>
+        </div>
+    </div>
+    <div class="bg-light p-3 rounded">
+        <label class="fw-bold text-primary"><i class="bi bi-chat-left-text me-2"></i>Motivo de la Consulta:</label>
+        <p class="mt-2 mb-0 italic">"@Model.Motivo"</p>
+    </div>
+</div>

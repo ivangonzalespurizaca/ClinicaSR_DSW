@@ -68,7 +68,7 @@ namespace Clinica_SantaRosa.PL.WebApp.Controllers
             else
             {
                 // Podrías usar TempData para enviar un mensaje de error a la vista
-                TempData["ErrorLogin"] = "Usuario o contraseña incorrectos.";
+                TempData["ErrorLogin"] = "Credenciales incorrectas.";
                 return RedirectToAction("Login", "Seguridad");
             }
         }

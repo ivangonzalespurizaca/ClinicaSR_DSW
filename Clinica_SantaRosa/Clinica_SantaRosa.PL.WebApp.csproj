@@ -12,10 +12,6 @@
     <ProjectReference Include="..\ClinicaSR.DL.DALC\ClinicaSR.DL.DALC.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties libman_1json__JsonSchema="cdnjs" /></VisualStudio></ProjectExtensions>
 
 </Project>

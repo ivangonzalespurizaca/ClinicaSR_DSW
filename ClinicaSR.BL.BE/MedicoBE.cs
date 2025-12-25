@@ -14,5 +14,12 @@ namespace ClinicaSR.BL.BE
         public string Telefono { get; set; }
         public EspecialidadBE EspecialidadBE { get; set; }
 
+        public MedicoBE()
+        {
+            EspecialidadBE = new EspecialidadBE();
+        }
+
+        // Propiedad calculada para mostrar en el modal
+        public string NombreCompleto => $"{Nombres} {Apellidos}";
     }
 }

@@ -165,5 +165,98 @@ namespace ClinicaSR.DL.DALC
             return eliminado;
         }
 
+        public List<MedicoBE> BuscarMedicos(string filtro)
+        {
+            List<MedicoBE> lista = new List<MedicoBE>();
+
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Medico_Buscar", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Filtro", filtro ?? "");
+                SqlDataReader dr = null;
+
+                try
+                {
+                    con.Open();
+                    dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        MedicoBE medico = new MedicoBE
+                        {
+                            ID_Medico = dr.GetInt64(0),
+                            Nombres = dr.GetString(1),
+                            Apellidos = dr.GetString(2),
+                            DNI = dr.GetString(3),
+
+                            EspecialidadBE = new EspecialidadBE
+                            {
+                                Nombre = dr.GetString(4)
+                            }
+                        };
+                        lista.Add(medico);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al buscar medicos: " + ex.Message);
+                }
+                finally
+                {
+                    if (dr != null && !dr.IsClosed) dr.Close();
+                }
+            }
+            return lista;
+        }
+        // 5. Obtener médico por ID
+        public MedicoBE ObtenerPorId(long idMedico)
+        {
+            MedicoBE medico = null;
+
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("USP_Medico_ObtenerPorId", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ID_Medico", idMedico);
+                SqlDataReader dr = null;
+
+                try
+                {
+                    con.Open();
+                    dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        medico = new MedicoBE
+                        {
+                            ID_Medico = dr.GetInt64(0),
+                            Nombres = dr.GetString(1),
+                            Apellidos = dr.GetString(2),
+                            DNI = dr.GetString(3),
+                            Nro_Colegiatura = dr.GetString(4),
+                            Telefono = dr.IsDBNull(5) ? null : dr.GetString(5),
+
+                            EspecialidadBE = new EspecialidadBE
+                            {
+                                ID_Especialidad = dr.GetInt64(6),
+                                Nombre = dr.GetString(7)
+                            }
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener medico por ID: " + ex.Message);
+                }
+                finally
+                {
+                    if (dr != null && !dr.IsClosed) dr.Close();
+                }
+            }
+            return medico;
+        }
+
     }
 }
