@@ -42,7 +42,7 @@ CREATE OR ALTER PROCEDURE USP_Horarios_ListarPorMedico
     @ID_Medico BIGINT
 AS
 BEGIN
-    -- Obtenemos los horarios registrados para el médico
+    -- Obtenemos los horarios registrados para el mÃ©dico
     SELECT 
         ID_Horario,
         Dia_Semana,
@@ -64,13 +64,13 @@ CREATE OR ALTER PROCEDURE USP_Horario_Registrar
     @Horario_Salida TIME
 AS
 BEGIN
-    -- Validar solapamiento básico o duplicado exacto
+    -- Validar solapamiento bÃ¡sico o duplicado exacto
     IF EXISTS (SELECT 1 FROM Horarios_Atencion 
                WHERE ID_Medico = @ID_Medico 
                AND Dia_Semana = @Dia_Semana 
                AND Horario_Entrada = @Horario_Entrada)
     BEGIN
-        RAISERROR('El médico ya tiene un horario registrado para esa hora y día.', 16, 1);
+        RAISERROR('El mÃ©dico ya tiene un horario registrado para esa hora y dÃ­a.', 16, 1);
         RETURN;
     END
 
@@ -149,19 +149,19 @@ CREATE OR ALTER PROCEDURE USP_Cita_Registrar
 AS
 BEGIN
     SET NOCOUNT ON;
-    -- IMPORTANTE: Sincronizar el primer día de la semana
+    -- IMPORTANTE: Sincronizar el primer dÃ­a de la semana
     SET DATEFIRST 7; 
 
     BEGIN TRY
         DECLARE @DiaSemana VARCHAR(10);
-        -- Calculamos el nombre del día con la configuración fija
+        -- Calculamos el nombre del dÃ­a con la configuraciÃ³n fija
         SET @DiaSemana = (CASE DATEPART(DW, @Fecha_Cita)
                             WHEN 1 THEN 'DOMINGO' WHEN 2 THEN 'LUNES'
                             WHEN 3 THEN 'MARTES'  WHEN 4 THEN 'MIERCOLES'
                             WHEN 5 THEN 'JUEVES'  WHEN 6 THEN 'VIERNES'
                             WHEN 7 THEN 'SABADO' END);
 
-        -- 1. VALIDACIÓN: Usar LTRIM/RTRIM para evitar fallos por espacios en blanco
+        -- 1. VALIDACIÃ“N: Usar LTRIM/RTRIM para evitar fallos por espacios en blanco
         IF NOT EXISTS (
             SELECT 1 FROM Horarios_Atencion 
             WHERE ID_Medico = @ID_Medico 
@@ -170,22 +170,22 @@ BEGIN
               AND @Hora_Cita < Horario_Salida
         )
         BEGIN
-            RAISERROR('El médico no tiene turno programado para este día o en esa hora específica.', 16, 1);
+            RAISERROR('El mÃ©dico no tiene turno programado para este dÃ­a o en esa hora especÃ­fica.', 16, 1);
             RETURN;
         END
 
-        -- 2. VALIDACIÓN: Disponibilidad (Cruce de citas)
+        -- 2. VALIDACIÃ“N: Disponibilidad (Cruce de citas)
         IF EXISTS (SELECT 1 FROM Cita 
                    WHERE ID_Medico = @ID_Medico 
                    AND Fecha_Cita = @Fecha_Cita 
                    AND Hora_Cita = @Hora_Cita 
                    AND Estado IN ('PENDIENTE', 'CONFIRMADO'))
         BEGIN
-            RAISERROR('El médico ya tiene una cita programada para esa fecha y hora.', 16, 1);
+            RAISERROR('El mÃ©dico ya tiene una cita programada para esa fecha y hora.', 16, 1);
             RETURN;
         END
 
-        -- Inserción
+        -- InserciÃ³n
         INSERT INTO Cita (ID_Medico, ID_Paciente, ID_Usuario, Fecha_Cita, Hora_Cita, Motivo, Estado)
         VALUES (@ID_Medico, @ID_Paciente, @ID_Usuario, @Fecha_Cita, @Hora_Cita, @Motivo, 'PENDIENTE');
 
@@ -238,14 +238,14 @@ BEGIN
         -- 1. Obtener el ID_Medico actual
         SELECT @ID_Medico = ID_Medico FROM Cita WHERE ID_Cita = @ID_Cita;
 
-        -- 2. Calcular nombre del día
+        -- 2. Calcular nombre del dÃ­a
         SET @DiaSemana = (CASE DATEPART(DW, @Fecha_Cita)
                             WHEN 1 THEN 'DOMINGO' WHEN 2 THEN 'LUNES'
                             WHEN 3 THEN 'MARTES'  WHEN 4 THEN 'MIERCOLES'
                             WHEN 5 THEN 'JUEVES'  WHEN 6 THEN 'VIERNES'
                             WHEN 7 THEN 'SABADO' END);
 
-        -- 3. VALIDACIÓN: Turno del médico
+        -- 3. VALIDACIÃ“N: Turno del mÃ©dico
         IF NOT EXISTS (
             SELECT 1 FROM Horarios_Atencion 
             WHERE ID_Medico = @ID_Medico 
@@ -254,11 +254,11 @@ BEGIN
               AND @Hora_Cita < Horario_Salida
         )
         BEGIN
-            RAISERROR('El médico no tiene turno programado para la nueva fecha/hora.', 16, 1);
+            RAISERROR('El mÃ©dico no tiene turno programado para la nueva fecha/hora.', 16, 1);
             RETURN;
         END
 
-        -- 4. VALIDACIÓN: Disponibilidad (Excluyendo la cita actual)
+        -- 4. VALIDACIÃ“N: Disponibilidad (Excluyendo la cita actual)
         IF EXISTS (SELECT 1 FROM Cita 
                    WHERE ID_Medico = @ID_Medico 
                    AND Fecha_Cita = @Fecha_Cita 
@@ -266,16 +266,16 @@ BEGIN
                    AND ID_Cita <> @ID_Cita 
                    AND Estado IN ('PENDIENTE', 'CONFIRMADO'))
         BEGIN
-            RAISERROR('El médico ya tiene otra cita programada en ese horario.', 16, 1);
+            RAISERROR('El mÃ©dico ya tiene otra cita programada en ese horario.', 16, 1);
             RETURN;
         END
 
-        -- 5. ACTUALIZACIÓN (Variables corregidas aquí)
+        -- 5. ACTUALIZACIÃ“N (Variables corregidas aquÃ­)
         UPDATE Cita 
         SET Fecha_Cita = @Fecha_Cita,
-            Hora_Cita = @Hora_Cita, -- Antes decía @Hora_C_ita
+            Hora_Cita = @Hora_Cita, -- Antes decÃ­a @Hora_C_ita
             Motivo = @Motivo
-        WHERE ID_Cita = @ID_Cita;   -- Antes decía ID_C_ita = @ID_C_ita
+        WHERE ID_Cita = @ID_Cita;   -- Antes decÃ­a ID_C_ita = @ID_C_ita
 
         SELECT @ID_Cita AS ID_Cita;
 
@@ -291,7 +291,7 @@ CREATE OR ALTER PROCEDURE USP_Paciente_Buscar
     @Criterio VARCHAR(100) = NULL -- Valor por defecto
 AS
 BEGIN
-    -- Si el criterio es nulo o vacío, podrías optar por no devolver nada 
+    -- Si el criterio es nulo o vacÃ­o, podrÃ­as optar por no devolver nada 
     -- o devolver los primeros 20 registros.
     SET @Criterio = TRIM(ISNULL(@Criterio, ''));
 
@@ -309,8 +309,8 @@ CREATE OR ALTER PROCEDURE USP_Horario_VerificarDisponibilidad
     @Fecha DATE
 AS
 BEGIN
-    -- Forzamos que el Domingo sea 1 para el cálculo de esta consulta
-    -- Esto evita fallos por configuración regional del servidor
+    -- Forzamos que el Domingo sea 1 para el cÃ¡lculo de esta consulta
+    -- Esto evita fallos por configuraciÃ³n regional del servidor
     SET DATEFIRST 7; 
 
     DECLARE @NombreDia VARCHAR(10);
@@ -324,7 +324,7 @@ BEGIN
                         WHEN 7 THEN 'SABADO'
                       END);
 
-    -- 1. RESULTADO: Horarios de atención (Entrada y Salida)
+    -- 1. RESULTADO: Horarios de atenciÃ³n (Entrada y Salida)
     -- Usamos Trim() para asegurar que no haya espacios extras en el VARCHAR
     SELECT ID_Horario, Horario_Entrada, Horario_Salida
     FROM Horarios_Atencion
@@ -357,7 +357,7 @@ BEGIN
         SET Estado = 'CANCELADO' 
         WHERE ID_Cita = @ID_Cita;
 
-        -- Retornamos el ID para confirmar la acción
+        -- Retornamos el ID para confirmar la acciÃ³n
         SELECT @ID_Cita AS ID_Cita;
     END TRY
     BEGIN CATCH
@@ -381,3 +381,340 @@ select * from paciente;
 
 SELECT * FROM Horarios_Atencion
 GO
+
+
+CREATE OR ALTER PROC USP_ListarPacientes
+AS
+BEGIN
+    SELECT
+        p.ID_Paciente,
+        p.Nombres,
+        p.Apellidos,
+        p.DNI,
+        p.Telefono,
+        p.Fecha_Nacimiento,
+        CASE 
+            WHEN EXISTS (
+                SELECT 1 
+                FROM Cita c 
+                WHERE c.ID_Paciente = p.ID_Paciente
+            )
+            THEN 1 ELSE 0
+        END AS TieneCitas
+    FROM Paciente p
+END
+GO
+
+
+
+--listo
+
+
+CREATE OR ALTER PROC USP_Eliminar_Paciente
+    @ID_Paciente BIGINT,
+    @Result BIT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tiene citas â†’ no se elimina
+    IF EXISTS (SELECT 1 FROM Cita WHERE ID_Paciente = @ID_Paciente)
+    BEGIN
+        SET @Result = 0;
+        RETURN;
+    END
+
+    -- No tiene citas â†’ se elimina
+    DELETE FROM Paciente
+    WHERE ID_Paciente = @ID_Paciente;
+
+    SET @Result = 1;
+END
+GO
+
+
+
+Exec USP_EliminarPacientes 4
+GO
+--ESTA Ready 
+
+CREATE OR ALTER PROC USP_InsertarPaciente
+    @Nombres VARCHAR(100),
+    @Apellidos VARCHAR(50),
+    @DNI VARCHAR(8),
+    @Fecha_Nacimiento DATE = NULL,
+    @Telefono VARCHAR(15) = NULL
+AS
+BEGIN
+    INSERT INTO Paciente
+    (
+        Nombres,
+        Apellidos,
+        DNI,
+        Fecha_Nacimiento,
+        Telefono
+    )
+    VALUES
+    (
+        @Nombres,
+        @Apellidos,
+        @DNI,
+        @Fecha_Nacimiento,
+        @Telefono
+    );
+
+    -- DEVUELVE EL ID GENERADO
+    SELECT SCOPE_IDENTITY() AS ID_Paciente;
+END
+GO
+
+
+--Esta Ready
+
+
+
+
+CREATE OR ALTER PROC USP_ActualizarPaciente
+    @ID_Paciente BIGINT,
+    @Nombres VARCHAR(100),
+    @Apellidos VARCHAR(50),
+    @DNI VARCHAR(8),
+    @Fecha_Nacimiento DATE = NULL,
+    @Telefono VARCHAR(15) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS (SELECT 1 FROM Paciente WHERE ID_Paciente = @ID_Paciente)
+    BEGIN
+        RAISERROR('El paciente no existe', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Paciente
+    SET
+        Nombres = @Nombres,
+        Apellidos = @Apellidos,
+        DNI = @DNI,
+        Fecha_Nacimiento = @Fecha_Nacimiento,
+        Telefono = @Telefono
+    WHERE ID_Paciente = @ID_Paciente;
+
+    SELECT @@ROWCOUNT AS FilasAfectadas;
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC USP_ObtenerPacientePorId
+    @ID_Paciente BIGINT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        ID_Paciente,
+        Nombres,
+        Apellidos,
+        DNI,
+        Fecha_Nacimiento,
+        Telefono
+    FROM Paciente
+    WHERE ID_Paciente = @ID_Paciente;
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROCEDURE USP_ListarMedico
+AS
+BEGIN
+    SELECT 
+        m.ID_Medico,
+        m.Nombres,
+        m.Apellidos,
+        m.DNI,
+        m.Nro_Colegiatura,
+        m.Telefono,
+        e.Nombre AS EspecialidadNombre,
+        CASE 
+            WHEN EXISTS (SELECT 1 FROM Cita c WHERE c.ID_Medico = m.ID_Medico) 
+            THEN 1 
+            ELSE 0 
+        END AS TieneCitas
+    FROM Medico m
+    INNER JOIN Especialidad e ON m.ID_Especialidad = e.ID_Especialidad
+END
+GO
+
+
+
+
+CREATE PROCEDURE USP_Insertar_Medico
+(
+    @Nombres           VARCHAR(100),
+    @Apellidos         VARCHAR(100),
+    @DNI               CHAR(8),
+    @Nro_Colegiatura   VARCHAR(50),
+    @Telefono          VARCHAR(20) = NULL,
+    @EspecialidadID    BIGINT,
+    @ID_Medico         INT OUTPUT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Medico
+    (
+        Nombres,
+        Apellidos,
+        DNI,
+        Nro_Colegiatura,
+        Telefono,
+        ID_Especialidad
+    )
+    VALUES
+    (
+        @Nombres,
+        @Apellidos,
+        @DNI,
+        @Nro_Colegiatura,
+        @Telefono,
+        @EspecialidadID
+    );
+
+    -- Retorna el ID generado
+    SET @ID_Medico = SCOPE_IDENTITY();
+END;
+GO
+DECLARE @ID INT;
+
+EXEC USP_Insertar_Medico
+    @Nombres = 'Juan',
+    @Apellidos = 'Ramiew',
+    @DNI = '12432132',
+    @Nro_Colegiatura = 'CMP12345',
+    @Telefono = '999999999',
+    @EspecialidadID = 1,
+    @ID_Medico = @ID OUTPUT;
+
+SELECT @ID AS ID_Insertado;
+GO
+
+CREATE PROCEDURE USP_Listar_Especialidades
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        ID_Especialidad,
+        Nombre
+    FROM Especialidad
+    ORDER BY Nombre;
+END;
+GO
+
+
+
+
+CREATE PROCEDURE USP_Actualizar_Medico
+    @ID_Medico BIGINT,
+    @Nombres VARCHAR(100),
+    @Apellidos VARCHAR(100),
+    @DNI VARCHAR(20),
+    @Nro_Colegiatura VARCHAR(50),
+    @Telefono VARCHAR(20) = NULL,
+    @EspecialidadID BIGINT,
+    @Result BIT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        UPDATE Medico
+        SET
+            Nombres = @Nombres,
+            Apellidos = @Apellidos,
+            DNI = @DNI,
+            Nro_Colegiatura = @Nro_Colegiatura,
+            Telefono = @Telefono,
+            ID_Especialidad = @EspecialidadID
+        WHERE ID_Medico = @ID_Medico;
+
+        IF @@ROWCOUNT > 0
+            SET @Result = 1;
+        ELSE
+            SET @Result = 0;
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, devolvemos 0
+        SET @Result = 0;
+    END CATCH
+END
+GO
+
+CREATE PROCEDURE USP_Buscar_Medico_PorID
+    @ID_Medico BIGINT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        SELECT 
+            M.ID_Medico,
+            M.Nombres,
+            M.Apellidos,
+            M.DNI,
+            M.Nro_Colegiatura,
+            M.Telefono,
+            M.ID_Especialidad,
+            E.Nombre AS EspecialidadNombre
+        FROM Medico M
+        LEFT JOIN Especialidad E ON M.ID_Especialidad = E.ID_Especialidad
+        WHERE M.ID_Medico = @ID_Medico;
+    END TRY
+    BEGIN CATCH
+        -- En caso de error, devolver NULL o mensaje
+        SELECT 
+            NULL AS ID_Medico,
+            NULL AS Nombres,
+            NULL AS Apellidos,
+            NULL AS DNI,
+            NULL AS Nro_Colegiatura,
+            NULL AS Telefono,
+            NULL AS ID_Especialidad,
+            NULL AS EspecialidadNombre;
+    END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE USP_Eliminar_Medico
+    @ID_Medico BIGINT,
+    @Result BIT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Verificar si tiene citas
+    IF EXISTS (SELECT 1 FROM Cita WHERE ID_Medico = @ID_Medico)
+    BEGIN
+        SET @Result = 0; -- No se puede eliminar
+        RETURN;
+    END
+
+    -- No tiene citas â†’ se elimina
+    DELETE FROM Medico
+    WHERE ID_Medico = @ID_Medico;
+
+    SET @Result = 1; -- Eliminado correctamente
+END
+GO
+
+
+
+
+
