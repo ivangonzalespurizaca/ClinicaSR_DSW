@@ -6,7 +6,7 @@ namespace Clinica_SantaRosa.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CitaController : Controller
+    public class CitaController : ControllerBase
     {
         private readonly CitaBC citaBC;
         public CitaController()

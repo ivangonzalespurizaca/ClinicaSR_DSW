@@ -1,0 +1,11 @@
+@API_URL = http://localhost:5288
+
+### LISTAR
+GET {{API_URL}}/api/Medico
+Accept: application/json
+
+###
+
+### BUSCAR POR NOMBRE
+GET {{API_URL}}/api/Medico/buscar?nombre=Jhon
+Accept: application/json
