@@ -5,231 +5,328 @@
     Layout = "~/Views/Shared/_LayoutAdministrador.cshtml";
 }
 
-<div class="container mt-4">
-    <div class="header-bar">
-        <h3><i class="bi bi-calendar-check me-2"></i>Gestión de Horarios</h3>
+<style>
+    /* Diseño Minimalista y Profesional */
+    .page-container {
+        margin-top: 2rem;
+    }
+
+    .card-modern {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        margin-bottom: 1.5rem;
+    }
+
+        .card-modern .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #edf2f7;
+            padding: 1rem 1.5rem;
+            border-radius: 12px 12px 0 0;
+        }
+
+    .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 0;
+        font-size: 1.1rem;
+    }
+
+    .form-label-custom {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        font-weight: 700;
+        color: #718096;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    .info-box {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        color: #2d3748;
+        font-weight: 500;
+        min-height: 38px;
+    }
+
+    .table-modern thead th {
+        background-color: #f8fafc;
+        color: #4a5568;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .day-badge {
+        background-color: #ebf4ff;
+        color: #2b6cb0;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+</style>
+
+<div class="container page-container pb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-0"><i class="bi bi-calendar-range me-2 text-primary"></i>Planificación de Horarios</h4>
+            <p class="text-muted small mb-0">Gestione los turnos de atención del staff médico</p>
+        </div>
+        <button class="btn btn-primary shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalMedico">
+            <i class="bi bi-search me-2"></i>Buscar Médico
+        </button>
     </div>
 
-    <div class="card-form mt-4">
-        <div class="row g-3">
-            <div class="col-md-3">
-                <label><i class="bi bi-credit-card-2-front me-1"></i>DNI</label>
-                <input id="medicoDni" value="@Model.Medico?.DNI" class="form-control" readonly>
-            </div>
-            <div class="col-md-3">
-                <label><i class="bi bi-person me-1"></i>Nombres</label>
-                <input id="medicoNombres" value="@Model.Medico?.Nombres" class="form-control" readonly>
-            </div>
-            <div class="col-md-3">
-                <label><i class="bi bi-person-badge me-1"></i>Apellidos</label>
-                <input id="medicoApellidos" value="@Model.Medico?.Apellidos" class="form-control" readonly>
-            </div>
-            <div class="col-md-3">
-                <label><i class="bi bi-heart-pulse me-1"></i>Especialidad</label>
-                <input id="medicoEspecialidad" value="@Model.Medico?.EspecialidadBE?.Nombre" class="form-control" readonly>
+    <div class="card card-modern">
+        <div class="card-header">
+            <h6 class="card-title text-primary"><i class="bi bi-person-check me-2"></i>Médico Seleccionado</h6>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <span class="form-label-custom">DNI</span>
+                    <div class="info-box">@(Model.Medico?.DNI ?? "—")</div>
+                </div>
+                <div class="col-md-6">
+                    <span class="form-label-custom">Nombre Completo</span>
+                    <div class="info-box">
+                        @if (Model.Medico != null)
+                        {
+                            <text>@Model.Medico.Nombres @Model.Medico.Apellidos</text>
+                        }
+                        else
+                        {
+                            <span class="text-muted small italic">Ningún médico seleccionado</span>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <span class="form-label-custom">Especialidad</span>
+                    <div class="info-box text-center">
+                        <span class="badge bg-info-subtle text-info border border-info-subtle px-2">
+                            @(Model.Medico?.EspecialidadBE?.Nombre ?? "—")
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <button class="btn btn-info d-flex align-items-center mb-4" data-bs-toggle="modal" data-bs-target="#modalMedico">
-        <i class="bi bi-search me-1"></i>Buscar Médico
-    </button>
-
-    <div class="modal fade" id="modalMedico" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content rounded-3 shadow-sm">
-                <div class="modal-header" style="background-color:#007bff; color:white;">
-                    <h5 class="modal-title"><i class="bi bi-person-badge me-1"></i>Buscar Médico</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card card-modern">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="card-title">Turnos Registrados</h6>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <input type="text" id="buscadorMedico" class="form-control" placeholder="Nombre, apellido o DNI...">
-                        <button id="btnBuscarMedico" class="btn btn-info" onclick="buscarMedicos()"><i class="bi bi-search"></i> Buscar</button>
-                    </div>
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-bordered text-center align-middle">
-                            <thead class="table-light">
+                        <table class="table table-hover table-modern mb-0">
+                            <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Especialidad</th>
-                                    <th>Acción</th>
+                                    <th class="ps-4">Día</th>
+                                    <th>Entrada</th>
+                                    <th>Salida</th>
+                                    <th class="text-center">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody id="cuerpoMedicos"></tbody>
+                            <tbody>
+                                @if (Model.ListaHorarios != null && Model.ListaHorarios.Any())
+                                {
+                                    @foreach (var hor in Model.ListaHorarios)
+                                    {
+                                        <tr>
+                                            <td class="ps-4"><span class="day-badge">@hor.Dia_Semana</span></td>
+                                            <td class="fw-bold">@hor.Horario_Entrada.ToString(@"hh\:mm")</td>
+                                            <td class="fw-bold">@hor.Horario_Salida.ToString(@"hh\:mm")</td>
+                                            <td class="text-center">
+                                                <form asp-action="Eliminar" method="post">
+                                                    <input type="hidden" name="idHorario" value="@hor.ID_Horario" />
+                                                    <input type="hidden" name="idMedico" value="@Model.Medico?.ID_Medico" />
+                                                    <button type="submit" class="btn btn-light btn-sm text-danger border">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5 text-muted small">No hay horarios registrados.</td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <hr class="my-4">
-
-    <h5 class="mb-3"><i class="bi bi-table me-1"></i>Horarios Registrados</h5>
-    <div class="table-responsive mb-4">
-        <table class="table table-bordered text-center align-middle">
-            <thead>
-                <tr>
-                    <th>Día</th>
-                    <th>Entrada</th>
-                    <th>Salida</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.ListaHorarios != null && Model.ListaHorarios.Any())
-                {
-                    @foreach (var hor in Model.ListaHorarios)
-                    {
-                        <tr>
-                            <td>@hor.Dia_Semana</td>
-                            <td>@hor.Horario_Entrada.ToString(@"hh\:mm")</td>
-                            <td>@hor.Horario_Salida.ToString(@"hh\:mm")</td>
-                            <td>
-                                <form asp-action="Eliminar" method="post" style="display:inline;">
-                                    <input type="hidden" name="idHorario" value="@hor.ID_Horario" />
-                                    <input type="hidden" name="idMedico" value="@Model.Medico.ID_Medico" />
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash me-1"></i>Eliminar
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="4" class="no-data">No hay horarios registrados para este médico</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-    <div class="card-form">
-        <form asp-action="Guardar" method="post">
-            <input type="hidden" asp-for="NuevoHorario.MedicoBE.ID_Medico" value="@Model.Medico?.ID_Medico" id="txtIdMedicoHidden">
-
-            <div class="row g-3">
-                <div class="col-md-3">
-                    <label>Día</label>
-                    <select asp-for="NuevoHorario.Dia_Semana" class="form-select" required>
-                        <option value="" disabled selected>Seleccionar día</option>
-                        @foreach (var dia in Enum.GetValues(typeof(ClinicaSR.BL.BE.DiaSemana)))
-                        {
-                            <option value="@dia">@dia</option>
-                        }
-                    </select>
+        <div class="col-lg-5">
+            <div class="card card-modern">
+                <div class="card-header">
+                    <h6 class="card-title"><i class="bi bi-plus-circle me-2 text-success"></i>Nuevo Turno</h6>
                 </div>
-                <div class="col-md-3">
-                    <label>Hora Entrada</label>
-                    <select asp-for="NuevoHorario.Horario_Entrada" class="form-select" required>
-                        <option value="" disabled selected>00:00</option>
-                        @for (int i = 7; i <= 22; i++)
-                        {
-                            string hora = i.ToString("D2") + ":00";
-                            <option value="@hora">@hora</option>
-                        }
-                    </select>
-                </div>
+                <div class="card-body">
+                    <form asp-action="Guardar" method="post">
+                        <input type="hidden" asp-for="NuevoHorario.MedicoBE.ID_Medico" value="@Model.Medico?.ID_Medico">
 
-                <div class="col-md-3">
-                    <label>Hora Salida</label>
-                    <select asp-for="NuevoHorario.Horario_Salida" class="form-select" required>
-                        <option value="" disabled selected>00:00</option>
-                        @for (int i = 7; i <= 22; i++)
-                        {
-                            string hora = i.ToString("D2") + ":00";
-                            <option value="@hora">@hora</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="bi bi-plus-circle me-1"></i>Registrar
-                    </button>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Día</label>
+                            <select asp-for="NuevoHorario.Dia_Semana" class="form-select" required>
+                                <option value="" disabled selected>Seleccione...</option>
+                                @foreach (var dia in Enum.GetValues(typeof(ClinicaSR.BL.BE.DiaSemana)))
+                                {
+                                    <option value="@dia">@dia</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Entrada</label>
+                                <select asp-for="NuevoHorario.Horario_Entrada" class="form-select" required>
+                                    @for (int i = 7; i <= 22; i++)
+                                    {
+                                        string h = i.ToString("D2") + ":00";
+                                        <option value="@h">@h</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold">Salida</label>
+                                <select asp-for="NuevoHorario.Horario_Salida" class="form-select" required>
+                                    @for (int i = 7; i <= 22; i++)
+                                    {
+                                        string h = i.ToString("D2") + ":00";
+                                        <option value="@h">@h</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 shadow-sm @(Model.Medico == null ? "disabled" : "")">
+                            Registrar Horario
+                        </button>
+                    </form>
                 </div>
             </div>
-        </form>
-    </div>
-
-    <div class="mt-3">
-        <a asp-action="Gestionar" class="btn btn-secondary">Limpiar / Nuevo</a>
+            <a asp-action="Gestionar" class="btn btn-outline-secondary btn-sm w-100 mt-2">Limpiar</a>
+        </div>
     </div>
 </div>
 
+<div class="modal fade" id="modalMedico" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h6 class="modal-title fw-bold">Buscar Médico</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="input-group mb-4 shadow-sm">
+                    <input type="text" id="buscadorMedico" class="form-control" placeholder="Nombre o DNI...">
+                    <button class="btn btn-info px-4" onclick="buscarMedicos()">Buscar</button>
+                </div>
+                <div class="table-responsive rounded-3 border">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Médico</th>
+                                <th>Especialidad</th>
+                                <th class="text-end">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoMedicos"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // 1. Notificación de Éxito
-                @if (TempData["Success"] != null)
-                {
-                        <text>
-                        Swal.fire({
-                            title: '¡Logrado!',
-                            text: '@TempData["Success"]',
-                            icon: 'success',
-                            confirmButtonColor: '#28c76f'
-                        });
-                        </text>
-                }
+        // Notificaciones de servidor
+        @if (TempData["Success"] != null)
+        {
+                <text>Swal.fire({ title: 'Éxito', text: '@TempData["Success"]', icon: 'success', confirmButtonColor: '#28c76f' });</text>
+        }
+        @if (TempData["Error"] != null)
+        {
+                <text>Swal.fire({ title: 'Atención', text: '@TempData["Error"]', icon: 'error', confirmButtonColor: '#e63946' });</text>
+        }
 
-                // 2. Notificación de Error
-                @if (TempData["Error"] != null)
-                {
-                        <text>
-                        Swal.fire({
-                            title: 'Error',
-                            text: '@TempData["Error"]',
-                            icon: 'error',
-                            confirmButtonColor: '#e63946'
-                        });
-                        </text>
-                }
-        // --- CÓDIGO NUEVO: Cargar lista al abrir el modal ---
-        document.addEventListener('DOMContentLoaded', function () {
-            var modalMedico = document.getElementById('modalMedico');
-
-            modalMedico.addEventListener('shown.bs.modal', function () {
-                // Limpiamos el buscador por si tenía algo escrito anteriormente
-                document.getElementById("buscadorMedico").value = "";
-                // Ejecutamos la búsqueda (al estar el input vacío, traerá todos)
-                buscarMedicos();
-            });
-        });
-
-        // Función AJAX para buscar médicos
+        // Función de Búsqueda Mejorada
         async function buscarMedicos() {
             const filtro = document.getElementById("buscadorMedico").value;
+            const cuerpo = document.getElementById("cuerpoMedicos");
+
+            // Mostrar cargando
+            cuerpo.innerHTML = '<tr><td colspan="4" class="text-center py-3"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>';
+
             try {
-                const res = await fetch(`/Horarios/BuscarMedico?filtro=${filtro}`);
+                // Cambiamos la ruta a una generada por el servidor para evitar el 404
+                const url = '@Url.Action("BuscarMedico", "Horario")' + '?filtro=' + encodeURIComponent(filtro);
+
+                const res = await fetch(url);
+
+                if (!res.ok) {
+                    throw new Error(`Error servidor: ${res.status}`);
+                }
+
                 const data = await res.json();
 
                 let html = "";
-                data.forEach(m => {
-                    html += `
-                        <tr>
-                            <td>${m.nombres}</td>
-                            <td>${m.apellidos}</td>
-                            <td>${m.especialidadBE.nombre}</td>
-                            <td>
-                                <button class="btn btn-success btn-sm" onclick="seleccionarMedico(${m.iD_Medico})">
-                                    <i class="bi bi-check-circle"></i> Seleccionar
-                                </button>
-                            </td>
-                        </tr>`;
-                });
-                document.getElementById("cuerpoMedicos").innerHTML = html;
+                if (data && data.length > 0) {
+                    data.forEach(m => {
+                        html += `
+                            <tr>
+                                <td><strong>${m.nombres}</strong></td>
+                                <td>${m.apellidos}</td>
+                                <td><span class="badge bg-light text-primary border">${m.especialidadBE ? m.especialidadBE.nombre : 'Sin especialidad'}</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-outline-success btn-sm rounded-pill px-3" onclick="seleccionarMedico(${m.iD_Medico})">
+                                        Seleccionar
+                                    </button>
+                                </td>
+                            </tr>`;
+                    });
+                } else {
+                    html = '<tr><td colspan="4" class="text-center text-muted py-3">No se encontraron médicos con ese criterio.</td></tr>';
+                }
+                cuerpo.innerHTML = html;
+
             } catch (err) {
-                console.error("Error al buscar médicos:", err);
+                console.error("Detalle del error:", err);
+                cuerpo.innerHTML = '<tr><td colspan="4" class="text-center text-danger py-3">No se pudo conectar con el controlador. Verifique el nombre del método en C#</td></tr>';
             }
         }
 
         function seleccionarMedico(id) {
-            window.location.href = `/Horarios/Gestionar?idMedico=${id}`;
+            // Usamos Url.Action también aquí para la redirección
+            window.location.href = '@Url.Action("Gestionar", "Horario")' + '?idMedico=' + id;
+        }
+
+        // Auto-busqueda al abrir el modal
+        const modalElement = document.getElementById('modalMedico');
+        if (modalElement) {
+            modalElement.addEventListener('shown.bs.modal', function () {
+                document.getElementById("buscadorMedico").value = "";
+                buscarMedicos();
+            });
         }
     </script>
+}
+
+
+
 }

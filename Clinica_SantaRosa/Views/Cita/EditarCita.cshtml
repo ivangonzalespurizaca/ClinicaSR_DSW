@@ -1,66 +1,141 @@
 ﻿@model ClinicaSR.BL.BE.CitaBE
 @{
     Layout = "_LayoutRecepcionista";
+    ViewData["Title"] = "Editar Cita";
 }
 
-<div class="container mt-4">
-    <div class="header-bar mb-4">
-        <h2><i class="bi bi-pencil-square me-2"></i>Editar Cita #@Model.ID_Cita</h2>
-    </div>
+<style>
+    /* Estilo Minimalista Blue-Grey */
+    .page-container {
+        margin-top: 0.5rem;
+        max-width: 900px;
+    }
 
-    <div class="card-form shadow-sm p-4 bg-white rounded-3">
-        <form id="formCita">
-            <input type="hidden" id="citaId" asp-for="ID_Cita" />
+    .card-modern {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label font-weight-bold"><i class="bi bi-person me-1"></i>Paciente</label>
-                    <input type="text" id="pacienteNombre" class="form-control bg-light"
-                           value="@Model.PacienteBE.Nombres @Model.PacienteBE.Apellidos" readonly />
-                    <input type="hidden" id="pacienteId" asp-for="PacienteBE.ID_Paciente" />
-                </div>
+    .card-header-modern {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #edf2f7;
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px 12px 0 0;
+    }
 
-                <div class="col-md-6">
-                    <label class="form-label font-weight-bold"><i class="bi bi-person-badge me-1"></i>Médico</label>
-                    <input type="text" id="medicoNombre" class="form-control bg-light"
-                           value="@Model.MedicoBE.Nombres @Model.MedicoBE.Apellidos" readonly />
-                    <input type="hidden" id="medicoId" asp-for="MedicoBE.ID_Medico" />
+    .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 0;
+        font-size: 1.25rem;
+    }
 
-                    <div id="contenedorHorariosRegulares" class="mt-2">
-                        <small class="text-muted fw-bold">Horarios de atención habituales:</small>
-                        <div id="listaHorariosRegulares" class="border rounded p-2 bg-light" style="font-size: 0.85rem;">
-                            <span class="text-muted">Cargando horarios...</span>
+    .form-label {
+        font-weight: 500;
+        color: #4a5568;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.6rem 0.75rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+
+    /* Estilo para campos no editables (Lectura) */
+    .bg-read-only {
+        background-color: #f8fafc !important;
+        color: #718096;
+        border-style: dashed;
+        cursor: not-allowed;
+    }
+
+    .alert-horarios {
+        background-color: #ebf8ff;
+        color: #2c5282;
+        border: none;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container page-container pb-5">
+    <div class="card card-modern">
+
+        <div class="card-header-modern">
+            <h5 class="card-title">
+                <i class="bi bi-pencil-square me-2 text-primary"></i>Reprogramar Cita #@Model.ID_Cita
+            </h5>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <form id="formCita">
+                <input type="hidden" id="citaId" asp-for="ID_Cita" />
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-person me-1"></i>Paciente</label>
+                        <input type="text" id="pacienteNombre" class="form-control bg-read-only"
+                               value="@Model.PacienteBE.Nombres @Model.PacienteBE.Apellidos" readonly />
+                        <input type="hidden" id="pacienteId" asp-for="PacienteBE.ID_Paciente" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-person-badge me-1"></i>Médico Asignado</label>
+                        <input type="text" id="medicoNombre" class="form-control bg-read-only"
+                               value="@Model.MedicoBE.Nombres @Model.MedicoBE.Apellidos" readonly />
+                        <input type="hidden" id="medicoId" asp-for="MedicoBE.ID_Medico" />
+
+                        <div id="contenedorHorariosRegulares" class="mt-3">
+                            <div class="alert alert-horarios py-2 px-3 mb-0">
+                                <small class="fw-bold d-block mb-1"><i class="bi bi-clock-history me-1"></i>Horarios de atención habituales:</small>
+                                <div id="listaHorariosRegulares" style="font-size: 0.85rem;">
+                                    <span class="text-muted small">Cargando disponibilidad habitual...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label font-weight-bold"><i class="bi bi-calendar-event me-1"></i>Fecha</label>
-                    <input type="date" asp-for="Fecha_Cita" class="form-control" id="fechaCita"
-                           value="@Model.Fecha_Cita.ToString("yyyy-MM-dd")"
-                           min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                <hr class="my-4 text-muted opacity-25">
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-calendar-event me-1"></i>Nueva Fecha</label>
+                        <input type="date" asp-for="Fecha_Cita" class="form-control" id="fechaCita"
+                               value="@Model.Fecha_Cita.ToString("yyyy-MM-dd")"
+                               min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-clock me-1"></i>Nueva Hora</label>
+                        <select id="horaCita" asp-for="Hora_Cita" class="form-select" required>
+                            <option value="@Model.Hora_Cita.ToString(@"hh\:mm")">@Model.Hora_Cita.ToString(@"hh\:mm") (Actual)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="col-md-6">
-                    <label class="form-label font-weight-bold"><i class="bi bi-clock me-1"></i>Hora</label>
-                    <select id="horaCita" asp-for="Hora_Cita" class="form-select" required>
-                        <option value="@Model.Hora_Cita.ToString(@"hh\:mm")">@Model.Hora_Cita.ToString(@"hh\:mm") (Actual)</option>
-                    </select>
+                <div class="mb-4">
+                    <label class="form-label"><i class="bi bi-chat-right-text me-1"></i>Motivo de la Cita</label>
+                    <textarea asp-for="Motivo" id="motivo" class="form-control" rows="3" placeholder="Actualice el motivo si es necesario...">@Model.Motivo</textarea>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <label class="form-label font-weight-bold"><i class="bi bi-pencil-square me-1"></i>Motivo</label>
-                <textarea asp-for="Motivo" id="motivo" class="form-control" rows="3">@Model.Motivo</textarea>
-            </div>
-
-            <div class="d-flex justify-content-center gap-3">
-                <a asp-action="Listar" class="btn btn-secondary px-5">Cancelar</a>
-                <button type="button" onclick="confirmarActualizacion()" class="btn btn-primary px-5">Guardar Cambios</button>
-            </div>
-        </form>
+                <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                    <a asp-action="Listar" class="btn btn-light border px-4">Cancelar</a>
+                    <button type="button" onclick="confirmarActualizacion()" class="btn btn-primary px-4 shadow-sm">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -68,20 +143,21 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/citas.js"></script>
     <script>
-        // Lógica de inicialización específica para Edición
+        // Inicialización de datos de edición
         document.addEventListener("DOMContentLoaded", function () {
             const idMed = document.getElementById("medicoId").value;
 
             if (idMed) {
-                // 1. Cargamos el panel de horarios habituales del médico
+                // Cargamos los horarios informativos del médico (de citas.js)
                 cargarHorariosRegulares(idMed);
 
-                // 2. Cargamos la disponibilidad de horas para la fecha actual de la cita
+                // Poblamos el select de horas con la disponibilidad (de citas.js)
+                // Se ejecuta para que el usuario vea otras opciones de horas ese día
                 actualizarDisponibilidad();
             }
         });
 
-        // Función para enviar la actualización (BC -> DALC -> SQL)
+        // Envío de datos mediante Fetch
         async function confirmarActualizacion() {
             const btn = document.querySelector("button[onclick='confirmarActualizacion()']");
 
@@ -93,12 +169,12 @@
             };
 
             if (!cita.Fecha_Cita || !cita.Hora_Cita || !cita.Motivo) {
-                Swal.fire("Atención", "Complete fecha, hora y motivo.", "warning");
+                Swal.fire("Atención", "Complete todos los campos requeridos.", "warning");
                 return;
             }
 
             btn.disabled = true;
-            btn.innerHTML = "Actualizando...";
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Actualizando...';
 
             fetch('/Cita/Actualizar', {
                 method: 'POST',
@@ -111,8 +187,12 @@
                 return data;
             })
             .then(exito => {
-                Swal.fire("Éxito", "Cita reprogramada correctamente.", "success")
-                    .then(() => window.location.href = "/Cita/Listar");
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Éxito!",
+                    text: "La cita ha sido actualizada correctamente.",
+                    confirmButtonColor: '#3182ce'
+                }).then(() => window.location.href = "/Cita/Listar");
             })
             .catch(err => {
                 btn.disabled = false;

@@ -18,11 +18,11 @@ namespace ClinicaSR.BL.BC
         {
             // 1. Validar que el Username no exista
             if (usuarioDALC.ObtenerPorUsername(obj.Username) != null)
-                throw new Exception($"El nombre de usuario '{obj.Username}' ya está en uso.");
+                throw new Exception($"El nombre de usuario {obj.Username} ya esta en uso.");
 
             // 2. Validar que el DNI no exista
             if (usuarioDALC.ObtenerPorDni(obj.DNI) != null)
-                throw new Exception($"El DNI '{obj.DNI}' ya está registrado con otro usuario.");
+                throw new Exception($"El DNI {obj.DNI} ya esta registrado con otro usuario.");
 
             // 3. Proceder al registro (El SP se encarga del HASH SHA2_512)
             return usuarioDALC.Registrar(obj);
@@ -41,7 +41,7 @@ namespace ClinicaSR.BL.BC
             UsuarioBE userConEseDni = usuarioDALC.ObtenerPorDni(obj.DNI);
             if (userConEseDni != null && userConEseDni.ID_Usuario != obj.ID_Usuario)
             {
-                throw new Exception("El DNI ingresado ya está asignado a otro usuario.");
+                throw new Exception("El DNI ingresado ya esta asignado a otro usuario.");
             }
 
             if (string.IsNullOrWhiteSpace(obj.Contrasenia))
@@ -61,7 +61,7 @@ namespace ClinicaSR.BL.BC
         public UsuarioBE BuscarPorUserName(string username)
         {
             if (string.IsNullOrEmpty(username))
-                throw new Exception("El nombre de usuario es obligatorio para la búsqueda.");
+                throw new Exception("El nombre de usuario es obligatorio para la busqueda.");
 
             return usuarioDALC.ObtenerPorUsername(username);
         }

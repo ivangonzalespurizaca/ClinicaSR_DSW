@@ -1,125 +1,175 @@
 ﻿@model ClinicaSR.BL.BE.UsuarioBE
 @{
     Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Editar Usuario";
 }
 
-@section Styles {
-    <style>
-        /* Mantenemos tus estilos de Poppins y Card-form aquí */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7fb;
+<style>
+    /* Diseño Minimalista y Profesional (Unificado) */
+    .page-container {
+        margin-top: 2rem;
+        max-width: 900px;
+    }
+
+    .card-modern {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .card-header-modern {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #edf2f7;
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 0;
+        font-size: 1.25rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #4a5568;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.6rem 0.75rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+        .form-control:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
         }
 
-        .card-form {
-            background-color: #fff;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-        }
+    /* Estilo de Avatar Rediseñado */
+    .preview-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px; /* Coherente con el Layout */
+        border: 3px solid #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-        .card-header-custom {
-            background-color: #007bff;
-            color: white;
-            font-weight: 600;
-            border-radius: 16px;
-            padding: 20px 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+    .search-box {
+        background-color: #ebf4ff;
+        border: 1px solid #bee3f8;
+        border-radius: 12px;
+        padding: 20px;
+    }
+</style>
 
-        .preview-img {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #007bff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
+<div class="container page-container pb-5">
 
-        .btn-uniforme {
-            height: calc(1.8em + 0.75rem + 2px);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-}
-
-<div class="container mt-4">
-    <h2 class="text-center text-primary fw-bold mb-4">Buscar y Editar Usuario</h2>
-
-    <div class="card-form mb-4">
+    <div class="search-box mb-4">
+        <h6 class="text-primary fw-bold mb-3"><i class="bi bi-search me-2"></i>Localizar Usuario</h6>
         <form asp-action="EditarUsuario" method="get" class="row g-3 align-items-center">
-            <div class="col-md-6">
-                <input type="text" name="nombreBusqueda" placeholder="Ingrese nombre de usuario" class="form-control" required />
+            <div class="col-md-7">
+                <input type="text" name="nombreBusqueda" placeholder="Ingrese nombre de usuario exacto..." class="form-control border-0 shadow-sm" required />
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary w-100 btn-uniforme">Buscar</button>
+                <button type="submit" class="btn btn-primary w-100 shadow-sm">
+                    <i class="bi bi-search me-1"></i> Buscar
+                </button>
             </div>
-            <div class="col-md-3">
-                <a asp-action="RegistrarUsuario" class="btn btn-secondary w-100 btn-uniforme">Regresar</a>
+            <div class="col-md-2">
+                <a asp-action="RegistrarUsuario" class="btn btn-outline-secondary w-100">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
             </div>
         </form>
     </div>
 
     @if (Model != null)
     {
-        <div class="card-form">
-            <div class="card-header-custom">
-                <i class="bi bi-pencil-square"></i> Editar Usuario: @Model.Username
+        <div class="card card-modern">
+            <div class="card-header-modern">
+                <div class="d-flex align-items-center">
+                    <div class="bg-success bg-opacity-10 p-2 rounded-3 me-3">
+                        <i class="bi bi-pencil-square text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <h5 class="card-title">Editando Perfil</h5>
+                        <small class="text-muted small">ID Usuario: #@Model.ID_Usuario | Username: <strong>@Model.Username</strong></small>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form asp-action="Actualizar" method="post" enctype="multipart/form-data" class="row g-3">
+
+            <div class="card-body p-4 p-md-5">
+                <form asp-action="Actualizar" method="post" enctype="multipart/form-data" class="row g-4">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="ID_Usuario" />
                     <input type="hidden" asp-for="Img_Perfil" />
 
                     <div class="col-md-6">
-                        <label class="form-label">Usuario</label>
-                        <input asp-for="Username" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Nombres</label>
-                        <input asp-for="Nombres" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Apellidos</label>
-                        <input asp-for="Apellidos" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">DNI</label>
-                        <input asp-for="DNI" class="form-control" required maxlength="8" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Teléfono</label>
-                        <input asp-for="Telefono" class="form-control" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Correo</label>
-                        <input asp-for="Correo" type="email" class="form-control" />
+                        <label class="form-label">Nombre de Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-at"></i></span>
+                            <input asp-for="Username" class="form-control border-start-0 ps-0" required />
+                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Nueva Contraseña (Opcional)</label>
-                        <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Dejar en blanco para no cambiar" />
-                    </div>
-
-                    <div class="col-md-12 text-center my-4">
-                        <label class="form-label d-block">Foto de Perfil Actual</label>
-                        <img id="preview" src="@(string.IsNullOrEmpty(Model.Img_Perfil) ? "/images/default-user.jpg" : Model.Img_Perfil)"
-                             class="preview-img mb-3">
-
-                        <div class="mx-auto" style="max-width: 400px;">
-                            <input type="file" id="archivoImagen" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-key"></i></span>
+                            <input asp-for="Contrasenia" type="password" class="form-control border-start-0 ps-0" placeholder="Dejar en blanco para mantener" />
                         </div>
                     </div>
 
-                    <div class="col-12 d-flex gap-3 mt-3">
-                        <button type="submit" class="btn btn-primary w-50 py-2">Actualizar Usuario</button>
-                        <a asp-action="Home" class="btn btn-secondary w-50 py-2">Volver al panel</a>
+                    <div class="col-md-6">
+                        <label class="form-label">Nombres</label>
+                        <input asp-for="Nombres" class="form-control" required />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Apellidos</label>
+                        <input asp-for="Apellidos" class="form-control" required />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">DNI</label>
+                        <input asp-for="DNI" class="form-control" required maxlength="8" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono</label>
+                        <input asp-for="Telefono" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input asp-for="Correo" type="email" class="form-control" />
+                    </div>
+
+                    <div class="col-12 text-center my-4 py-3 bg-light rounded-3">
+                        <label class="form-label d-block mb-3 fw-bold">Imagen de Perfil</label>
+                        <img id="preview" src="@(string.IsNullOrEmpty(Model.Img_Perfil) ? "/images/default-user.jpg" : Model.Img_Perfil)"
+                             class="preview-img mb-3 border">
+
+                        <div class="mx-auto" style="max-width: 400px;">
+                            <input type="file" id="archivoImagen" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
+                            <small class="text-muted mt-2 d-block">Formatos permitidos: JPG, PNG. Máx 2MB.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-between border-top pt-4">
+                        <a asp-controller="Home" asp-action="PanelAdministrador" class="btn btn-light border px-4">
+                            <i class="bi bi-house me-1"></i> Panel Inicio
+                        </a>
+                        <button type="submit" class="btn btn-primary px-5 shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i> Guardar Cambios
+                        </button>
                     </div>
                 </form>
             </div>
@@ -132,8 +182,8 @@
     <script>
         const success = '@TempData["Success"]';
         const error = '@ViewBag.Error';
-        if (success) Swal.fire("¡Éxito!", success, "success");
-        if (error) Swal.fire("Error", error, "error");
+        if (success) Swal.fire({ icon: 'success', title: '¡Éxito!', text: success, confirmButtonColor: '#3182ce' });
+        if (error) Swal.fire({ icon: 'error', title: 'Error', text: error });
 
         function previewImage(event) {
             const reader = new FileReader();

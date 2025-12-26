@@ -1,133 +1,208 @@
 ﻿@model ClinicaSR.BL.BE.UsuarioBE
 @{
-    Layout = "_LayoutAdministrador"; // O el nombre de tu layout principal
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Registro de Usuario";
 }
 
-@section Styles {
-    <style>
-        /* Mantenemos tus estilos personalizados aquí */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7fb;
-        }
+<style>
+    /* Diseño Minimalista y Profesional (Unificado) */
+    .page-container {
+        margin-top: 2rem;
+        max-width: 900px;
+    }
 
-        .header-bar {
-            background-color: #007bff;
-            color: white;
-            border-radius: 12px;
-            padding: 15px 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-        }
+    .card-modern {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
 
-        .card-form {
-            background-color: #fff;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
+    .card-header-modern {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #edf2f7;
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px 12px 0 0;
+    }
 
-        .preview-img {
-            display: none;
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #007bff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
-    </style>
-}
+    .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 0;
+        font-size: 1.25rem;
+    }
 
-<div class="container mt-4">
-    <div class="header-bar">
-        <h2><i class="bi bi-person-plus-fill me-2"></i>Registro de Usuario</h2>
-    </div>
+    .sub-header {
+        font-size: 0.85rem;
+        color: #718096;
+    }
 
-    <div class="card-form shadow-sm">
-        <form asp-action="Registro" asp-controller="Usuarios" method="post" enctype="multipart/form-data" class="row g-3">
+    .form-label {
+        font-weight: 500;
+        color: #4a5568;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Nombre de Usuario</label>
-                <input asp-for="Username" class="form-control" placeholder="Ej: admin01" required>
-            </div>
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.6rem 0.75rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Contraseña</label>
-                <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Contraseña" required>
-            </div>
+    .form-control:focus, .form-select:focus {
+        border-color: #3182ce;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    }
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Nombres</label>
-                <input asp-for="Nombres" class="form-control" placeholder="Nombres" required>
-            </div>
+    /* Estilo de previsualización de Avatar */
+    .avatar-upload-container {
+        position: relative;
+        display: inline-block;
+    }
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Apellidos</label>
-                <input asp-for="Apellidos" class="form-control" placeholder="Apellidos" required>
-            </div>
+    .preview-img {
+        display: none;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px; /* Cuadrado redondeado para coincidir con el layout */
+        border: 3px solid #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
+    }
 
-            <div class="col-md-4">
-                <label class="form-label font-weight-bold">DNI</label>
-                <input asp-for="DNI" class="form-control" placeholder="DNI" required maxlength="8">
-            </div>
+    .footer-hospital {
+        background-color: #f8fafc;
+        border-top: 1px solid #edf2f7;
+        padding: 1rem;
+        border-radius: 0 0 12px 12px;
+        color: #a0aec0;
+        font-size: 0.8rem;
+    }
+</style>
 
-            <div class="col-md-4">
-                <label class="form-label font-weight-bold">Teléfono</label>
-                <input asp-for="Telefono" class="form-control" placeholder="Teléfono">
-            </div>
+<div class="container page-container pb-5">
+    <div class="card card-modern">
 
-            <div class="col-md-4">
-                <label class="form-label font-weight-bold">Rol</label>
-                <select asp-for="Rol" class="form-select">
-                    <option value="RECEPCIONISTA">RECEPCIONISTA</option>
-                    <option value="CAJERO">CAJERO</option>
-                </select>
-            </div>
+        <div class="card-header-modern">
+            <h5 class="card-title">
+                <i class="bi bi-person-plus-fill me-2 text-primary"></i>Registro de Usuario
+            </h5>
+            <div class="sub-header">Cree credenciales de acceso para el personal administrativo y de atención</div>
+        </div>
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Correo</label>
-                <input asp-for="Correo" type="email" class="form-control" placeholder="correo@ejemplo.com">
-            </div>
+        <div class="card-body p-4 p-md-5">
+            <form asp-action="Registro" asp-controller="Usuarios" method="post" enctype="multipart/form-data" class="row g-4">
+                
+                <div class="col-md-6">
+                    <label asp-for="Username" class="form-label">Nombre de Usuario</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-at"></i></span>
+                        <input asp-for="Username" class="form-control border-start-0 ps-0" placeholder="Ej: jperrez01" required>
+                    </div>
+                </div>
 
-            <div class="col-md-6">
-                <label class="form-label font-weight-bold">Foto de Perfil</label>
-                <input type="file" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
-            </div>
+                <div class="col-md-6">
+                    <label asp-for="Contrasenia" class="form-label">Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-key"></i></span>
+                        <input asp-for="Contrasenia" type="password" class="form-control border-start-0 ps-0" placeholder="Min. 8 caracteres" required>
+                    </div>
+                </div>
 
-            <div class="col-12 d-flex justify-content-center align-items-center flex-column my-4">
-                <img id="preview" class="preview-img" alt="Vista previa">
-                <small class="text-muted mt-2">Vista previa de la imagen</small>
-            </div>
+                <hr class="my-4 text-muted opacity-25">
 
-            <div class="col-12 d-flex gap-3">
-                <a asp-controller="Home" asp-action="PanelAdministrador" class="btn btn-secondary w-50 py-2">Cancelar</a>
-                <button type="submit" class="btn btn-primary w-50 py-2">Registrar Usuario</button>
-                <a asp-action="EditarUsuario" class="btn btn-secondary w-50 py-2">Editar Usuarios</a>
-            </div>
-        </form>
+                <div class="col-md-6">
+                    <label asp-for="Nombres" class="form-label">Nombres</label>
+                    <input asp-for="Nombres" class="form-control" placeholder="Juan Antonio" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Apellidos" class="form-label">Apellidos</label>
+                    <input asp-for="Apellidos" class="form-control" placeholder="Pérez García" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="DNI" class="form-label">DNI</label>
+                    <input asp-for="DNI" class="form-control" placeholder="8 dígitos" required maxlength="8">
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Telefono" class="form-label">Teléfono</label>
+                    <input asp-for="Telefono" class="form-control" placeholder="987 654 321">
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Rol" class="form-label">Rol en el Sistema</label>
+                    <select asp-for="Rol" class="form-select">
+                        <option value="RECEPCIONISTA">RECEPCIONISTA</option>
+                        <option value="CAJERO">CAJERO</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Correo" class="form-label">Correo Electrónico</label>
+                    <input asp-for="Correo" type="email" class="form-control" placeholder="usuario@clinicasr.com">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Foto de Perfil</label>
+                    <input type="file" name="archivoImagen" accept="image/*" class="form-control" onchange="previewImage(event)">
+                </div>
+
+                <div class="col-12 text-center my-3">
+                    <div class="avatar-upload-container">
+                        <img id="preview" class="preview-img" alt="Vista previa">
+                    </div>
+                    <p id="preview-text" class="text-muted small" style="display:none;">Vista previa de la foto seleccionada</p>
+                </div>
+
+                <div class="col-12 mt-4 d-flex justify-content-between border-top pt-4">
+                    <a asp-controller="Home" asp-action="PanelAdministrador" class="btn btn-light border px-4">
+                        <i class="bi bi-arrow-left me-1"></i> Cancelar
+                    </a>
+                    <div class="d-flex gap-2">
+                        <a asp-action="EditarUsuario" class="btn btn-outline-secondary px-4">
+                             Ver Usuarios
+                        </a>
+                        <button type="submit" class="btn btn-primary px-5 shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i> Registrar Usuario
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer-hospital text-center">
+            <i class="bi bi-shield-lock me-1"></i> El registro de usuarios es responsabilidad exclusiva del Administrador.
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Capturar mensajes del servidor
+        // Mensajes del Servidor
         const successMsg = '@TempData["Success"]';
         const errorMsg = '@ViewBag.Error';
 
-        if (successMsg) Swal.fire("¡Éxito!", successMsg, "success");
-        if (errorMsg) Swal.fire("Error", errorMsg, "error");
+        if (successMsg) Swal.fire({ icon: 'success', title: '¡Éxito!', text: successMsg, confirmButtonColor: '#3182ce' });
+        if (errorMsg) Swal.fire({ icon: 'error', title: 'Atención', text: errorMsg });
 
-        // Previsualización de imagen (FileReader)
+        // Previsualización (Optimizado)
         function previewImage(event) {
             const input = event.target;
             const preview = document.getElementById('preview');
+            const previewText = document.getElementById('preview-text');
+            
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     preview.src = e.target.result;
-                    preview.style.display = 'block';
+                    preview.style.display = 'inline-block';
+                    previewText.style.display = 'block';
                 }
                 reader.readAsDataURL(input.files[0]);
             }

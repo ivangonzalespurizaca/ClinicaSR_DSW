@@ -118,7 +118,7 @@ namespace Clinica_SantaRosa.PL.WebApp.Controllers
                 if (usuario.ID_Usuario == idUsuarioLogueado)
                 {
                     HttpContext.Session.Clear(); // Limpiamos la sesión
-                    TempData["Success"] = "Datos actualizados. Inicie sesión de nuevo.";
+                    TempData["Success"] = "Datos actualizados, ingrese al sistema de nuevo.";
                     return RedirectToAction("Login", "Seguridad");
                 }
 

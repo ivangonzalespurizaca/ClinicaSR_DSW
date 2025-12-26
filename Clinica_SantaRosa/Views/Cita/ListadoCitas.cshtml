@@ -3,92 +3,132 @@
 @{
     ViewData["Title"] = "Listado de Citas";
     Layout = "~/Views/Shared/_LayoutRecepcionista.cshtml";
-    // Ajusta la ruta del layout según tu estructura de carpetas
     var texto = ViewBag.texto as string;
 }
 
-@section Styles {
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Mantén tus estilos CSS aquí, funcionan igual en ASP.NET */
-        body {
-            background-color: #f4f7fb;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
+<style>
+    /* Diseño Minimalista y Profesional */
+    .page-container {
+        margin-top: 1.5rem;
+    }
+
+    .card-modern {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+        .card-modern .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #edf2f7;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px 12px 0 0;
         }
 
-        .card {
-            border: none;
-            border-radius: 16px;
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            max-width: 1200px;
-            margin: 50px auto;
-        }
+    .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
 
-        .card-header {
-            background-color: #007bff;
-            color: white;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            padding: 20px 25px;
-        }
+    /* Tabla Estilizada */
+    .table-modern thead th {
+        background-color: #f8fafc;
+        color: #4a5568;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.025em;
+        border-bottom: 2px solid #e2e8f0;
+        padding: 1rem;
+    }
 
-        .btn-success {
-            background-color: #28c76f;
-            border: none;
-            font-weight: 600;
-        }
+    .table-modern tbody td {
+        padding: 1rem;
+        color: #4a5568;
+        vertical-align: middle;
+        border-bottom: 1px solid #edf2f7;
+    }
 
-        .table thead {
-            background-color: #eaf2ff;
-            color: #0056b3;
-            font-weight: 700;
-        }
+    /* Badges de Estado más sobrios */
+    .badge-status {
+        padding: 0.4em 0.8em;
+        font-weight: 500;
+        border-radius: 6px;
+        font-size: 0.85rem;
+    }
 
-        .badge-pendiente {
-            background-color: #ffc107;
-            color: #000;
-        }
+    .st-confirmado {
+        background-color: #def7ec;
+        color: #03543f;
+    }
 
-        .badge-confirmado {
-            background-color: #28a745;
-            color: #fff;
-        }
+    .st-pendiente {
+        background-color: #fef3c7;
+        color: #92400e;
+    }
 
-        .badge-cancelado {
-            background-color: #dc3545;
-            color: #fff;
-        }
-    </style>
-}
+    .st-cancelado {
+        background-color: #fde8e8;
+        color: #9b1c1c;
+    }
 
-<div class="container">
-    <div class="card">
+    /* Buscador */
+    .search-group .form-control {
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .search-group .btn {
+        border-radius: 0 8px 8px 0;
+    }
+
+    .btn-action {
+        border-radius: 8px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+    }
+</style>
+
+<div class="page-container container-fluid px-4">
+    <div class="card card-modern">
+
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4><i class="bi bi-calendar-check me-2"></i>Listado de Citas</h4>
+            <h5 class="card-title">
+                <i class="bi bi-calendar3 me-2 text-primary"></i>Gestión de Citas Médicas
+            </h5>
+            <div class="header-actions">
+                <a asp-controller="Cita" asp-action="RegistrarCita" class="btn btn-primary btn-action shadow-sm">
+                    <i class="bi bi-plus-lg me-1"></i> Registrar Cita
+                </a>
+            </div>
         </div>
 
         <div class="card-body">
-            <div class="d-flex justify-content-between mb-3">
-                <a asp-controller="Cita" asp-action="RegistrarCita" class="btn btn-success">
-                    <i class="bi bi-plus-circle"></i> Registrar Cita
-                </a>
-                <a href="/citas/ReporteCitas" class="btn btn-outline-primary" target="_blank">
-                    <i class="bi bi-file-earmark-text"></i> Generar Reporte
-                </a>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <form asp-action="Listar" asp-controller="Cita" method="get">
+                        <div class="input-group search-group">
+                            <span class="input-group-text bg-white border-end-0 text-muted">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" name="texto" class="form-control border-start-0 ps-0"
+                                   placeholder="Buscar por nombre o DNI..." value="@texto">
+                            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <a href="/citas/ReporteCitas" class="btn btn-outline-secondary btn-action" target="_blank">
+                        <i class="bi bi-file-earmark-text me-1"></i> Generar Reporte
+                    </a>
+                </div>
             </div>
 
-            <form asp-action="Listar" asp-controller="Cita" method="get" class="mb-3">
-                <div class="input-group">
-                    <input type="text" name="texto" class="form-control" placeholder="Buscar por nombre o DNI"
-                           value="@texto">
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Buscar</button>
-                </div>
-            </form>
-
             <div class="table-responsive">
-                <table class="table table-bordered text-center align-middle">
+                <table class="table table-hover table-modern">
                     <thead>
                         <tr>
                             <th>DNI Paciente</th>
@@ -96,9 +136,8 @@
                             <th>Médico</th>
                             <th>Fecha</th>
                             <th>Hora</th>
-                            <th>Motivo</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,60 +146,47 @@
                             @foreach (var cita in Model)
                             {
                                 <tr>
-                                    <td>@cita.PacienteBE.DNI</td>
+                                    <td class="fw-medium text-dark">@cita.PacienteBE.DNI</td>
                                     <td>@cita.PacienteBE.Nombres</td>
-                                    <td>@cita.MedicoBE.Nombres</td>
+                                    <td><span class="small fw-bold text-secondary">@cita.MedicoBE.Nombres</span></td>
                                     <td>@cita.Fecha_Cita.ToString("dd/MM/yyyy")</td>
-                                    <td>@cita.Hora_Cita.ToString(@"hh\:mm")</td>
-                                    <td>@cita.Motivo</td>
+                                    <td><i class="bi bi-clock me-1 text-muted small"></i> @cita.Hora_Cita.ToString(@"hh\:mm")</td>
                                     <td>
                                         @{
-                                            var badgeClass = cita.Estado switch
+                                            var badgeStyle = cita.Estado switch
                                             {
-                                                ClinicaSR.BL.BE.EstadoCita.CONFIRMADO => "bg-success",
-                                                ClinicaSR.BL.BE.EstadoCita.PENDIENTE => "bg-warning text-dark",
-                                                ClinicaSR.BL.BE.EstadoCita.CANCELADO => "bg-danger",
-                                                _ => "bg-secondary"
+                                                ClinicaSR.BL.BE.EstadoCita.CONFIRMADO => "st-confirmado",
+                                                ClinicaSR.BL.BE.EstadoCita.PENDIENTE => "st-pendiente",
+                                                ClinicaSR.BL.BE.EstadoCita.CANCELADO => "st-cancelado",
+                                                _ => "bg-light text-muted"
                                             };
                                         }
-                                        <span class="badge @badgeClass">@cita.Estado</span>
+                                        <span class="badge-status @badgeStyle">@cita.Estado</span>
                                     </td>
-                                    <td class="actions">
-                                        <button class="btn btn-info btn-sm" onclick="verDetalleCita(@cita.ID_Cita)">
-                                            <i class="bi bi-eye"></i> Detalle
-                                        </button>
-
-                                        @* MEJORA: Permitir editar y cancelar tanto PENDIENTES como CONFIRMADOS *@
-                                        @if (cita.Estado == ClinicaSR.BL.BE.EstadoCita.PENDIENTE ||
-                                                                        cita.Estado == ClinicaSR.BL.BE.EstadoCita.CONFIRMADO)
-                                        {
-                                            <a asp-action="EditarCita" asp-route-id="@cita.ID_Cita" class="btn btn-warning btn-sm">
-                                                <i class="bi bi-pencil-square"></i> Editar
-                                            </a>
-
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                    onclick="confirmarEliminar('@cita.ID_Cita')">
-                                                <i class="bi bi-x-circle"></i> Cancelar
+                                    <td class="text-center">
+                                        <div class="btn-group gap-1">
+                                            <button class="btn btn-light btn-sm text-primary border" onclick="verDetalleCita(@cita.ID_Cita)" title="Ver Detalle">
+                                                <i class="bi bi-eye"></i>
                                             </button>
 
-                                            <form id="form-cancelar-@cita.ID_Cita"
-                                                  asp-action="Cancelar"
-                                                  asp-controller="Cita"
-                                                  asp-route-id="@cita.ID_Cita"
-                                                  method="post"
-                                                  style="display:none;">
-                                            </form>
-                                        }
-                                        else
-                                        {
-                                            @* Si está CANCELADO o VENCIDO, los botones se muestran deshabilitados *@
-                                            <button class="btn btn-secondary btn-sm" disabled>
-                                                <i class="bi bi-pencil-square"></i> Editar
-                                            </button>
-                                            <button class="btn btn-secondary btn-sm" disabled title="Esta cita ya no se puede cancelar">
-                                                <i class="bi bi-x-circle"></i> Cancelar
-                                            </button>
-                                        }
+                                            @if (cita.Estado == ClinicaSR.BL.BE.EstadoCita.PENDIENTE || cita.Estado == ClinicaSR.BL.BE.EstadoCita.CONFIRMADO)
+                                            {
+                                                <a asp-action="EditarCita" asp-route-id="@cita.ID_Cita" class="btn btn-light btn-sm text-warning border" title="Editar">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+
+                                                <button type="button" class="btn btn-light btn-sm text-danger border" onclick="confirmarEliminar('@cita.ID_Cita')" title="Anular">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </button>
+
+                                                <form id="form-cancelar-@cita.ID_Cita" asp-action="Cancelar" asp-controller="Cita" asp-route-id="@cita.ID_Cita" method="post" style="display:none;"></form>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-light btn-sm text-muted border" disabled><i class="bi bi-pencil-square"></i></button>
+                                                <button class="btn btn-light btn-sm text-muted border" disabled><i class="bi bi-x-circle"></i></button>
+                                            }
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -168,7 +194,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="7" class="no-data">No hay citas registradas.</td>
+                                <td colspan="7" class="text-center py-5 text-muted">No hay citas registradas.</td>
                             </tr>
                         }
                     </tbody>
@@ -180,19 +206,17 @@
 
 <div class="modal fade" id="modalDetalleCita" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title"><i class="bi bi-info-circle me-2"></i>Detalles de la Cita</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom-0">
+                <h6 class="modal-title fw-bold"><i class="bi bi-info-circle me-2 text-info"></i>Detalles de la Cita</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div id="contenidoModalDetalle" class="modal-body p-4">
-                <div class="text-center">
-                    <div class="spinner-border text-info" role="status"></div>
-                    <p class="mt-2">Cargando información...</p>
-                </div>
+            <div id="contenidoModalDetalle" class="modal-body p-4 text-center">
+                <div class="spinner-border text-info" role="status"></div>
+                <p class="mt-2">Cargando información...</p>
             </div>
-            <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="modal-footer border-top-0 bg-light">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -203,7 +227,6 @@
     <script src="~/js/citas.js"></script>
 
     <script>
-        // Notificaciones desde el Controlador
         const successMsg = '@ViewBag.Success';
         const errorMsg = '@ViewBag.Error';
 
@@ -212,14 +235,15 @@
 
         function confirmarEliminar(id) {
             Swal.fire({
-                title: "¿Estás seguro?",
-                text: "La cita cambiará a estado CANCELADO.",
+                title: "¿Anular cita?",
+                text: "La cita pasará a estado CANCELADO permanentemente.",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#e63946",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Sí, cancelar cita",
-                cancelButtonText: "Regresar"
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#f8f9fa",
+                confirmButtonText: "Sí, anular",
+                cancelButtonText: "Regresar",
+                customClass: { cancelButton: 'text-dark border' }
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(`form-cancelar-${id}`).submit();

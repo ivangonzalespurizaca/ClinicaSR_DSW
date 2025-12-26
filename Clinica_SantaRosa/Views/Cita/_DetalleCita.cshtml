@@ -1,43 +1,170 @@
 ﻿@model ClinicaSR.BL.BE.CitaBE
 
-<div class="container-fluid">
-    <div class="row mb-3">
-        <div class="col-6">
-            <label class="fw-bold text-muted small uppercase">Información del Paciente</label>
-            <p class="mb-1"><i class="bi bi-person-fill me-2"></i>@Model.PacienteBE.Nombres</p>
-            <p class="text-secondary"><i class="bi bi-card-text me-2"></i>DNI: @Model.PacienteBE.DNI</p>
+<style>
+    /* Contenedor principal con padding para que no toque los bordes del modal */
+    .modal-detail-wrapper {
+        padding: 1.5rem;
+    }
+
+    .detail-label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        color: #94a3b8; /* Slate 400 */
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .detail-value {
+        color: #1e293b; /* Slate 800 */
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0;
+        line-height: 1.2;
+    }
+
+    /* Iconos estilizados */
+    .detail-icon {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background-color: #f1f5f9;
+        color: #64748b;
+        margin-right: 15px;
+        flex-shrink: 0;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Tarjetas de Fecha y Hora */
+    .info-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.75rem;
+        text-align: center;
+        transition: all 0.2s;
+    }
+
+    /* Badges de Estado */
+    .status-pill {
+        padding: 0.75rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-align: center;
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
+    .pill-success {
+        background-color: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+    }
+
+    .pill-warning {
+        background-color: #fef9c3;
+        color: #a16207;
+        border: 1px solid #fef08a;
+    }
+
+    .pill-danger {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+    }
+
+    /* Caja de Motivo mejorada */
+    .motivo-container {
+        margin-top: 1rem;
+        padding: 1.25rem;
+        background-color: #f8fafc;
+        border-radius: 16px;
+        border: 1px solid #f1f5f9;
+        position: relative;
+    }
+
+    .quote-icon {
+        color: #e2e8f0;
+        font-size: 1.5rem;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+</style>
+
+<div class="modal-detail-wrapper">
+    <div class="row g-4 mb-4">
+        <div class="col-sm-6">
+            <div class="d-flex align-items-center">
+                <div class="detail-icon">
+                    <i class="bi bi-person-fill text-primary"></i>
+                </div>
+                <div>
+                    <label class="detail-label">Paciente</label>
+                    <p class="detail-value text-capitalize">@Model.PacienteBE.Nombres @Model.PacienteBE.Apellidos</p>
+                    <small class="text-muted fw-medium">DNI: @Model.PacienteBE.DNI</small>
+                </div>
+            </div>
         </div>
-        <div class="col-6 border-start">
-            <label class="fw-bold text-muted small uppercase">Información del Médico</label>
-            <p class="mb-1"><i class="bi bi-heart-pulse-fill me-2 text-danger"></i>@Model.MedicoBE.Nombres</p>
-            <p class="text-secondary"><i class="bi bi-patch-check me-2"></i>@Model.MedicoBE.EspecialidadBE.Nombre</p>
+        <div class="col-sm-6">
+            <div class="d-flex align-items-center">
+                <div class="detail-icon">
+                    <i class="bi bi-person-badge-fill text-info"></i>
+                </div>
+                <div>
+                    <label class="detail-label">Especialista</label>
+                    <p class="detail-value">@Model.MedicoBE.Nombres</p>
+                    <small class="text-muted fw-medium">@Model.MedicoBE.EspecialidadBE.Nombre</small>
+                </div>
+            </div>
         </div>
     </div>
-    <hr />
-    <div class="row mb-3">
-        <div class="col-4 text-center">
-            <label class="fw-bold d-block">Fecha</label>
-            <span class="badge bg-light text-dark border p-2 w-100">
-                <i class="bi bi-calendar3 me-1"></i> @Model.Fecha_Cita.ToString("dd/MM/yyyy")
-            </span>
+
+    <div class="row g-3 mb-4">
+        <div class="col-4">
+            <label class="detail-label text-center">Fecha</label>
+            <div class="info-card shadow-sm">
+                <i class="bi bi-calendar3 d-block mb-1 text-primary"></i>
+                <span class="small fw-bold text-dark">@Model.Fecha_Cita.ToString("dd MMM yyyy")</span>
+            </div>
         </div>
-        <div class="col-4 text-center">
-            <label class="fw-bold d-block">Hora</label>
-            <span class="badge bg-light text-dark border p-2 w-100">
-                <i class="bi bi-clock me-1"></i> @Model.Hora_Cita.ToString(@"hh\:mm")
-            </span>
+        <div class="col-4">
+            <label class="detail-label text-center">Horario</label>
+            <div class="info-card shadow-sm">
+                <i class="bi bi-clock d-block mb-1 text-primary"></i>
+                <span class="small fw-bold text-dark">@Model.Hora_Cita.ToString(@"hh\:mm")</span>
+            </div>
         </div>
-        <div class="col-4 text-center">
-            <label class="fw-bold d-block">Estado</label>
+        <div class="col-4">
+            <label class="detail-label text-center">Estado</label>
             @{
-                var color = Model.Estado == ClinicaSR.BL.BE.EstadoCita.CONFIRMADO ? "success" :
-                (Model.Estado == ClinicaSR.BL.BE.EstadoCita.PENDIENTE ? "warning" : "danger");
+                var pillClass = Model.Estado switch
+                {
+                    ClinicaSR.BL.BE.EstadoCita.CONFIRMADO => "pill-success",
+                    ClinicaSR.BL.BE.EstadoCita.PENDIENTE => "pill-warning",
+                    ClinicaSR.BL.BE.EstadoCita.CANCELADO => "pill-danger",
+                    _ => "bg-light text-muted"
+                };
             }
-            <span class="badge bg-@color p-2 w-100">@Model.Estado</span>
+            <span class="status-pill @pillClass shadow-sm">@Model.Estado</span>
         </div>
     </div>
-    <div class="bg-light p-3 rounded">
-        <label class="fw-bold text-primary"><i class="bi bi-chat-left-text me-2"></i>Motivo de la Consulta:</label>
-        <p class="mt-2 mb-0 italic">"@Model.Motivo"</p>
+
+    <div class="row">
+        <div class="col-12">
+            <label class="detail-label">Motivo de la Consulta</label>
+            <div class="motivo-container">
+                <i class="bi bi-quote quote-icon"></i>
+                <p class="mb-0 text-secondary" style="font-style: italic; line-height: 1.6; padding-right: 20px;">
+                    @Model.Motivo
+                </p>
+            </div>
+        </div>
     </div>
 </div>
