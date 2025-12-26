@@ -1,5 +1,7 @@
 ﻿using ClinicaSR.BL.BC;
 using ClinicaSR.BL.BE;
+using ClinicaSR.DL.DALC;
+using Microsoft.Data.SqlClient;
 
 namespace Clinica_SantaRosa.PL.WebApp.Models
 {
@@ -32,6 +34,32 @@ namespace Clinica_SantaRosa.PL.WebApp.Models
         {
             return medicobc.EliminarMedico(id);
         }
+
+        public bool ExisteDNI(string dni)
+        {
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Medico WHERE DNI = @DNI", con);
+                cmd.Parameters.AddWithValue("@DNI", dni);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        public bool ExisteNroColegiatura(string nroColegiatura)
+        {
+            using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Medico WHERE Nro_Colegiatura = @NroColegiatura", con);
+                cmd.Parameters.AddWithValue("@NroColegiatura", nroColegiatura);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+
 
 
     }

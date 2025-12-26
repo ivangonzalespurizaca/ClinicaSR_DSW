@@ -85,54 +85,72 @@ namespace ClinicaSR.DL.DALC
                     con.Open();
                     cmd.ExecuteNonQuery();
                     idInsertado = Convert.ToInt32(idSalida.Value);
+                    Console.WriteLine("=== DEBUG: ID Insertado: " + idInsertado);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al insertar medico: " + ex.Message);
+                    Console.WriteLine("Error al insertar médico: " + ex.Message);
                 }
             }
 
             return idInsertado;
         }
 
+
         // 3. Actualizar médico
         public bool Actualizar(MedicoBE medicoBE)
         {
             bool actualizado = false;
 
+
             using (SqlConnection con = ConexionDALC.GetConnectionBDHospital())
             {
-                SqlCommand cmd = new SqlCommand("USP_Actualizar_Medico", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@ID_Medico", medicoBE.ID_Medico);
-                cmd.Parameters.AddWithValue("@Nombres", medicoBE.Nombres);
-                cmd.Parameters.AddWithValue("@Apellidos", medicoBE.Apellidos);
-                cmd.Parameters.AddWithValue("@DNI", medicoBE.DNI);
-                cmd.Parameters.AddWithValue("@Nro_Colegiatura", medicoBE.Nro_Colegiatura);
-                cmd.Parameters.AddWithValue("@Telefono", (object)medicoBE.Telefono ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@EspecialidadID", medicoBE.EspecialidadBE.ID_Especialidad);
-
-                SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
+                using (SqlCommand cmd = new SqlCommand("USP_Actualizar_Medico", con))
                 {
-                    Direction = ParameterDirection.Output
-                };
-                cmd.Parameters.Add(result);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                try
-                {
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    actualizado = Convert.ToBoolean(result.Value);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al actualizar medico: " + ex.Message);
+                    // Parámetros obligatorios
+                    cmd.Parameters.AddWithValue("@ID_Medico", medicoBE.ID_Medico);
+                    cmd.Parameters.AddWithValue("@Nombres", medicoBE.Nombres ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@Apellidos", medicoBE.Apellidos ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@DNI", medicoBE.DNI ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@Nro_Colegiatura", medicoBE.Nro_Colegiatura ?? string.Empty);
+
+                    // Telefono opcional
+                    cmd.Parameters.AddWithValue("@Telefono",
+                        string.IsNullOrWhiteSpace(medicoBE.Telefono) ? DBNull.Value : (object)medicoBE.Telefono);
+
+                    // Especialidad
+                    cmd.Parameters.AddWithValue("@EspecialidadID", (long)(medicoBE.EspecialidadBE?.ID_Especialidad ?? 0));
+
+                    // Parámetro de salida
+                    SqlParameter result = new SqlParameter("@Result", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(result);
+
+                    try
+                    {
+                        con.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                       
+
+                        actualizado = Convert.ToBoolean(result.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al actualizar medico: " + ex.Message);
+                        throw; // Importante: lanzar para no ocultar errores
+                    }
                 }
             }
-
             return actualizado;
         }
+
+
+
 
         // 4. Eliminar médico
         public bool Eliminar(int id)

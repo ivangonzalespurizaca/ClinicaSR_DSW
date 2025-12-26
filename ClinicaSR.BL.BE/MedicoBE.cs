@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ClinicaSR.BL.BE
@@ -14,6 +15,8 @@ namespace ClinicaSR.BL.BE
         public string Telefono { get; set; }
         public EspecialidadBE EspecialidadBE { get; set; }
         public bool TieneCitas { get; set; }
+
+        public long ID_EspecialidadSeleccionada { get; set; }
 
         public MedicoBE()
         {
