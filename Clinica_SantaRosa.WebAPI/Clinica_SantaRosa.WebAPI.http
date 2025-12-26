@@ -1,6 +1,54 @@
 @Clinica_SantaRosa.WebAPI_HostAddress = http://localhost:5288
 
-GET {{Clinica_SantaRosa.WebAPI_HostAddress}}/weatherforecast/
-Accept: application/json
 
+GET {{Clinica_SantaRosa.WebAPI_HostAddress}}/weatherforecast
+Accept: application/json
 ###
+
+GET {{Clinica_SantaRosa.WebAPI_HostAddress}}/ruta/Paciente
+Accept: application/json
+###
+
+GET {{Clinica_SantaRosa.WebAPI_HostAddress}}/ruta/Paciente/5
+Accept: application/json
+###
+
+DELETE {{Clinica_SantaRosa.WebAPI_HostAddress}}/ruta/Paciente/eliminar/5
+Accept: application/json
+###
+
+
+POST {{Clinica_SantaRosa.WebAPI_HostAddress}}/ruta/Paciente/insertar
+Content-Type: application/json
+{
+  "nombres": "Nilsasas",
+  "apellidos": "Assss",
+  "dni": "asasa",
+  "fecha_Nacimiento": "1995-05-10",
+  "telefono": "587486985"
+}
+###
+
+PUT http://localhost:5288/ruta/Paciente/actualizar
+Content-Type: application/json
+
+{
+  "id_Paciente": 2,
+  "nombres": "Jhon",
+  "apellidos": "Perez Lopez",
+  "dni": "12345678",
+  "fecha_Nacimiento": "1990-06-15",
+  "telefono": "999888777"
+}
+###
+
+
+
+
+
+
+
+
+
+
+
